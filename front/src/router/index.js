@@ -15,7 +15,9 @@ const routes = [
   {
     path: '/createboard/:title',
     name: 'Create',
-    component: () => import(/* webpackChunkName: "about" */ '../views/Createpost.vue')
+    component: () => import(/* webpackChunkName: "about" */ '../views/Createpost.vue'),
+    props:true
+
   }
 ]
 

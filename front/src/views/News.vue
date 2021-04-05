@@ -1,6 +1,6 @@
 <template>
   <div class="about">
-    <Recommend_new class="w-11/12 m-auto my-4" />
+    <Recommend_new class="w-11/12 m-auto my-24" />
   </div>
 </template>
 

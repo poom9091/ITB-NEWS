@@ -1,6 +1,6 @@
 <template>
   <div id="nav">
-    <Navbar/>
+    <Navbar class="fixed top-0 w-screen"/>
   </div>
   <router-view/>
 </template>

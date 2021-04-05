@@ -2,7 +2,6 @@
 <div>
     <div class="flex bg-blue-500 p-4 text-white justify-between ">
         <div class=" font-extrabold text-3xl">
-            
             <h1>ITB-NEWS</h1>
         </div>
         <div class="flex space-x-4 text-xl font-semibold ">
