@@ -1,34 +1,43 @@
-import axios from 'axios'
-import { createStore } from 'vuex'
+import axios from "axios";
+import { createStore } from "vuex";
+
+let urlnew="https://newsapi.org/v2/top-headlines?country=th&category=technology&apiKey=380094e98a684b578fa885b235439b36"
 
 export default createStore({
   state: {
-    news:[]
+    news: [],
+    isLoading:true
   },
-  getters:{
-    getNews:state=>{
-      return state.news
+  getters: {
+    getNews: (state) => {
+      return state.news;
+    },
+    getLoad: (state) => {
+      return state.isLoading;
     }
   },
   mutations: {
-    setNews(state,news){
-      state.news=news
+    setNews(state, news) {
+      state.news = news;
+    },
+    setLoad(state,load){
+      console.log(load);
+      state.isLoading=load
     }
   },
   actions: {
-    getNewsFromApi(context){
+    
+    async getNewsFromApi({commit}){
+      let n =[]
+      await axios.get(urlnew)
+      .then((response) => {
+        n=response.data.articles
+        commit("setNews",response.data.articles)})
+        commit("setLoad",false)
+      console.log(n)
       
-      let news
-      axios
-        .get('https://newsapi.org/v2/top-headlines?country=th&category=technology&apiKey=380094e98a684b578fa885b235439b36')
-        .then(response =>{
-          // console.log('hi');
-          news=response.data
-          // console.log(news)
-          context.commit('setNews',news)
-        })
+     
     }
   },
-  modules: {
-  }
-})
+  modules: {},
+});
