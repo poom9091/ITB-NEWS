@@ -1,5 +1,5 @@
 <template>
-  <div class=" h-screen flex flex-wrap mt-24 ">
+  <div class=" flex flex-wrap mt-28">
     <div
       class=" mx-auto  px-5 py-6 rounded-lg flex flex-col relative border-blue-900 border-4 w-96 space-y-4"
     >
