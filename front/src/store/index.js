@@ -26,7 +26,6 @@ export default createStore({
     }
   },
   actions: {
-    
     async getNewsFromApi({commit}){
       let n =[]
       await axios.get(urlnew)
@@ -34,9 +33,7 @@ export default createStore({
         n=response.data.articles
         commit("setNews",response.data.articles)})
         commit("setLoad",false)
-      console.log(n)
-      
-     
+      console.log(n)   
     }
   },
   modules: {},

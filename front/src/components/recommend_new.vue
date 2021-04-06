@@ -3,7 +3,7 @@
     <div class=" text-blue-600 font-extrabold text-4xl my-3 ">
       News Today
     </div>
-    <div v-for="n in news" :key="n" class="">
+    <div v-for="(n) in news" :key="n.index"  >
       <div class="flex flex-wrap p-5 my-3 ">
         <img :src="n.urlToImage" class="rounded-xl w-4/12 " />
         <div class="w-7/12  flex-col flex justify-around mx-auto ">
@@ -23,7 +23,7 @@
                     img: n.urlToImage,
                     des: n.description,
                     url: n.url,
-                    link: n.publishedAt,
+                    time: n.publishedAt,
                   },
                 }"
                 class=" transition duration-200 ease-in-out flex space-x-3  border-gray-400 border-2 p-3 rounded-md hover:bg-blue-400 hover:text-white"
@@ -96,6 +96,7 @@
 import { mapState } from "vuex";
 // import {mapState} from 'vuex';
 export default {
+  newshow:7,
   computed: {
     ...mapState(["news", "isLoading"]),
   },
@@ -104,6 +105,7 @@ export default {
       window.location.href = url;
     },
   },
+  
 };
 </script>
 
