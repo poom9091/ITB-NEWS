@@ -1,7 +1,7 @@
 <template>
-  <div class=" h-full bg-gray-300 pt-24 pb-10">
-    <div class="bg-white rounded-md  max-w-2xl mx-auto p-6 shadow-2xl">
-      <div class=" text-3xl font-semibold text-blue-400">Create Post</div>
+  <div class=" h-full pt-24 pb-10">
+    <div class=" border-blue-800 border-4 rounded-md  max-w-2xl mx-auto p-6 shadow-2xl">
+      <div class=" text-3xl font-semibold text-blue-700">Create Post</div>
       <div class="flex flex-col space-y-4 py-2 justify-around">
         <div class=" text-2xl font-semibold">{{ this.title }}</div>
         <img
@@ -15,7 +15,7 @@
           <input
             v-model="this.ptitle"
             id="title"
-            class=" w-full border-2  p-2 text-black rounded-md border-dashed focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-300"
+            class=" w-full border-2 border-indigo-300 p-2 text-black rounded-md border-dashed focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-300"
             placeholder="Title"
           />
         </div>
@@ -27,7 +27,7 @@
             v-model="this.pdes"
             rows="4"
             id="title"
-            class=" w-full border-2  p-2 text-black rounded-md border-dashed focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-300"
+            class=" w-full border-2  p-2 text-black border-indigo-300 rounded-md border-dashed focus:border-transparent focus:outline-none focus:ring-2 focus:ring-blue-300"
             placeholder="Description"
           />
         </div>

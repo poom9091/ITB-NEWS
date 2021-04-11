@@ -1,6 +1,6 @@
 <template>
   <div id="nav">
-    <Navbar class="fixed top-0 w-screen"/>
+    <Navbar class="fixed top-0 w-screen z-40"/>
   </div>
   <router-view/>
 </template>
@@ -14,9 +14,10 @@ export default {
   },
   created(){
     this.getNewsFromApi();
+    this.getPostFromApi();
   },
   methods:{
-    ...mapActions(['getNewsFromApi'])
+    ...mapActions(['getNewsFromApi','getPostFromApi'])
   }
 }
 </script>

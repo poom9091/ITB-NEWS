@@ -1,10 +1,10 @@
 <template>
-  <div class=" h-screen flex flex-wrap mt-24 ">
+  <div class=" flex flex-wrap mt-28">
     <div
       class=" mx-auto  px-5 py-6 rounded-lg flex flex-col relative border-blue-900 border-4 w-96 space-y-4"
     >
       <div class=" text-black text-2xl font-bold">Log in</div>
-      <button class=" flex bg-blue-500 px-2 py-2 rounded-lg">
+      <button class="transition duration-200 ease-in-out hover:bg-blue-700 flex bg-blue-500 px-2 py-2 rounded-lg">
         <svg
           class="fill-current h-6 text-white w-2/12 my-auto"
           xmlns="http://www.w3.org/2000/svg"
@@ -18,7 +18,7 @@
           Login with Facebook
         </div>
       </button>
-      <button class=" flex bg-red-500 px-2 py-2 rounded-lg">
+      <button class="transition duration-200 ease-in-out hover:bg-red-700 flex bg-red-500 px-2 py-2 rounded-lg">
         <svg
           class="fill-current h-6 text-white w-2/12 my-auto"
           viewBox="0 0 24 24"
@@ -54,15 +54,18 @@
         </svg>
       </div>
       <input v-model="email" class=" bg-gray-200 rounded-lg p-3" placeholder="Email">
-      <input v-model="password" type="password" class=" bg-gray-200 rounded-lg p-3" placeholder="Password">
-      <button class=" flex bg-gray-500 px-2 py-2 rounded-lg">
+      <input v-model="password" type="password" class=" bg-gray-200 rounded-lg p-3 " placeholder="Password">
+      <button class=" flex bg-gray-500 px-2 py-2 rounded-lg transition duration-200 ease-in-out hover:bg-gray-700">
           <svg xmlns="http://www.w3.org/2000/svg" class=" h-6 text-white w-2/12 my-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
             </svg>
-        <div class=" text-white font-semibold w-10/12 my-auto">
+        <div class="  text-white font-semibold w-10/12 my-auto">
           Login with Email
         </div>
       </button>
+      
+      <button class="transition duration-200 ease-in-out font-semibold text-gray-500 border-2 rounded-lg p-2 hover:bg-gray-400 hover:text-white "> Create account </button>
+      <button class=" text-sm text-gray-500 underline w-full text-right px-4"> Forget password</button>
     </div>
     
   </div>
