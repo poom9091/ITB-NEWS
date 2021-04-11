@@ -82,7 +82,7 @@ export default {
         postdes: this.pdes,
       };
       axios
-        .post("http://127.0.0.1:81/", newinfo)
+        .post("http://127.0.0.1:81/createpost", newinfo)
         .then((response) => (this.newinfo = response.data));
       console.log(newinfo);
     },
