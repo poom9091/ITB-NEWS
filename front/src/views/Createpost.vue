@@ -51,7 +51,7 @@
 
 <script>
 import axios from "axios";
-
+import {mapGetters} from "vuex"
 export default {
   title: '',
   img: 'start',
@@ -61,6 +61,7 @@ export default {
   ptitle:'',
   pdes:'',
   created(){
+    
     this.title = this.$route.params.title
     this.img = this.$route.params.img
     this.des = this.$route.params.des
@@ -69,10 +70,15 @@ export default {
     if(this.url==null){
       this.$router.push('/')
     }
+    console.log(this.getUID().uid);
+    console.log(this.getUID().name);
   },
   methods:{
+    ...mapGetters(['getUID']),
     createpost(){
       const newinfo = {
+        uid:this.getUID().uid,
+        name:this.getUID().name,
         newtitle : this.title,
         newimg : this.img,
         newdes : this.des,
