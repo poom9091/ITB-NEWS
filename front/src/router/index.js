@@ -11,7 +11,17 @@ const routes = [
   {
     path: '/login',
     name: 'Login',
-    component: () => import(/* webpackChunkName: "about" */ '../views/Login.vue')
+    component: () => import(/* webpackChunkName: "about" */ '../views/Login.vue'),
+    children:[
+      {
+        path:'',
+        component: () => import('../components/template_login.vue')
+      },
+      {
+        path:'register',
+        component: () => import('../components/register.vue')
+      },
+    ]
   },
   {
     path: '/board',

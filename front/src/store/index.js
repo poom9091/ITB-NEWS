@@ -9,7 +9,11 @@ export default createStore({
     news: [],
     isLoading:true,
     posts:[],
-    isLoading_post:true
+    isLoading_post:true,
+    user:{
+      uid:'',
+      name:''
+    }
   },
   getters: {
     getNews: (state) => {
@@ -17,6 +21,9 @@ export default createStore({
     },
     getLoad: (state) => {
       return state.isLoading;
+    },
+    getUID: (state) => {
+      return state.user
     }
   },
   mutations: {
@@ -32,8 +39,17 @@ export default createStore({
     setLoadPost(state,load){
       state.isLoading_post=load
     },
+    setUsername(state,user){
+      state.user.uid=user.uid
+      state.user.name=user.name
+    },
   },
   actions: {
+    async setUser({commit},user){
+      console.log(user.uid);
+      console.log(user.name);
+      commit('setUsername',user)
+    },
     async getNewsFromApi({commit}){
       let n =[]
       await axios.get(urlnew)
@@ -54,7 +70,9 @@ export default createStore({
         commit('setPost',response.data)
         commit('setLoadPost',false)
       })
-    }
+    },
+    
   },
+  
   modules: {},
 });

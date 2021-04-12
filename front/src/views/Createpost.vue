@@ -51,35 +51,44 @@
 
 <script>
 import axios from "axios";
-
+import {mapGetters} from "vuex"
 export default {
-  title: "",
-  img: "start",
-  des: "",
-  url: "",
-  time: "",
-  ptitle: "",
-  pdes: "",
-  created() {
-    this.title = this.$route.params.title;
-    this.img = this.$route.params.img;
-    this.des = this.$route.params.des;
-    this.url = this.$route.params.url;
-    this.time = this.$route.params.time;
-    if (this.url == null) {
-      this.$router.push("/");
+
+  title: '',
+  img: 'start',
+  des: '',
+  url: '',
+  time: '',
+  ptitle:'',
+  pdes:'',
+  created(){
+    
+    this.title = this.$route.params.title
+    this.img = this.$route.params.img
+    this.des = this.$route.params.des
+    this.url = this.$route.params.url
+    this.time = this.$route.params.time
+    if(this.url==null){
+      this.$router.push('/')
+
     }
+    console.log(this.getUID().uid);
+    console.log(this.getUID().name);
   },
-  methods: {
-    createpost() {
+
+  methods:{
+    ...mapGetters(['getUID']),
+    createpost(){
       const newinfo = {
-        newtitle: this.title,
-        newimg: this.img,
-        newdes: this.des,
-        newurl: this.url,
-        newtime: this.time,
-        posttitle: this.ptitle,
-        postdes: this.pdes,
+        uid:this.getUID().uid,
+        name:this.getUID().name,
+        newtitle : this.title,
+        newimg : this.img,
+        newdes : this.des,
+        newurl : this.url,
+        newtime : this.time,
+        posttitle : this.ptitle,
+        postdes : this.pdes
       };
       axios
         .post("http://127.0.0.1:81/createpost", newinfo)
