@@ -40,7 +40,7 @@ const routes = [
     props:true
   },
   {
-    path: '/comment/:titel',
+    path: '/comment/:_id',
     name: 'Comment',
     component: () => import('../views/Comment.vue'),
     prop:true

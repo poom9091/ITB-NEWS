@@ -1,8 +1,14 @@
 <template>
   <div v-if="!isLoading_post" class=" px-3">
-    <div
+    <router-link
       v-for="p in posts"
       :key="p.index"
+      :to="{
+        name: 'Comment',
+        params: {
+          _id: p._id,
+        },
+      }"
       class=" bg-white rounded-xl border-4 hover:border-black divide-y"
     >
       <div class="p-2 px-3">
@@ -43,7 +49,9 @@
         </div>
       </div>
 
-      <div class=" p-3 overflow-ellipsis overflow-auto max-h-24" >{{ p.postdes }}</div>
+      <div class=" p-3 overflow-ellipsis overflow-auto max-h-24">
+        {{ p.postdes }}
+      </div>
 
       <div class="flex justify-star space-x-14 px-3 py-1 align-middle">
         <div class="flex justify-between w-10 space-x-2">
@@ -77,11 +85,11 @@
               />
             </svg>
           </div>
-          <div >{{ p.vote }}</div>
+          <div>{{ p.vote }}</div>
           <div>Comments</div>
         </div>
       </div>
-    </div>
+    </router-link>
   </div>
   <div v-else>
     <div>Loading....</div>
@@ -98,6 +106,9 @@ export default {
     goURL(url) {
       window.location.href = url;
     },
+  },
+  mounted() {
+    console.log(this.posts);
   },
 };
 </script>

@@ -1,11 +1,11 @@
 <template lang="">
     <div>
-           KL
+        {{title}}
     </div>
 </template>
 <script>
 export default {
-    
+    props: ['title']
 }
 </script>
 <style lang="">
