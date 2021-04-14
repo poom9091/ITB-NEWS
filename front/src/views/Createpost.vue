@@ -4,12 +4,12 @@
       <div class=" text-3xl font-semibold text-blue-700">Create Post</div>
       <div class="flex flex-col space-y-4 py-2 justify-around">
         <div class=" text-2xl font-semibold">{{ this.title }}</div>
-        <img
-          :src="this.img"
-          class="rounded-xl w-96 m-auto shadow-lg "
-        />
+        <img :src="this.img" class="rounded-xl w-96 m-auto shadow-lg " />
         <div class=" flex flex-row space-x-3 px-4">
-          <div id=topic class=" max-w-max w-max  text-base font-medium my-auto">
+          <div
+            id="topic"
+            class=" max-w-max w-max  text-base font-medium my-auto"
+          >
             Topic
           </div>
           <input
@@ -20,7 +20,7 @@
           />
         </div>
         <div class=" flex flex-row space-x-3 px-4">
-          <div id='des' class=" max-w-max w-max  text-base font-medium my-auto">
+          <div id="des" class=" max-w-max w-max  text-base font-medium my-auto">
             Description
           </div>
           <textarea
@@ -33,7 +33,7 @@
         </div>
         <div class=" flex flex-row space-x-3 justify-end">
           <button
-            v-on:click='createpost()'
+            v-on:click="createpost()"
             class="transition duration-200 border-2 border-blue-600 bg-blue-400  p-3 py-2 rounded-lg text-white text-base font-semibold transform  hover:-translate-y-1  hover:scale-110"
           >
             Create
@@ -53,6 +53,7 @@
 import axios from "axios";
 import {mapGetters} from "vuex"
 export default {
+
   title: '',
   img: 'start',
   des: '',
@@ -69,10 +70,12 @@ export default {
     this.time = this.$route.params.time
     if(this.url==null){
       this.$router.push('/')
+
     }
     console.log(this.getUID().uid);
     console.log(this.getUID().name);
   },
+
   methods:{
     ...mapGetters(['getUID']),
     createpost(){
@@ -87,12 +90,12 @@ export default {
         posttitle : this.ptitle,
         postdes : this.pdes
       };
-      axios.post("https://reqres.in/invalid-url",newinfo)
-      .then(response => this.newinfo = response.data)
+      axios
+        .post("http://127.0.0.1:81/createpost", newinfo)
+        .then((response) => (this.newinfo = response.data));
       console.log(newinfo);
     },
-    
-  }
+  },
 };
 </script>
 
