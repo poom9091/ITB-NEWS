@@ -60,6 +60,8 @@ export default {
           console.log(error);
         });
       this.setUser(user);
+      localStorage.uid = user.uid
+      localStorage.name = user.name
       this.$router.push("/");
     },
   },

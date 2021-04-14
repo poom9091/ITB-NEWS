@@ -38,6 +38,12 @@ const routes = [
     name: 'Create',
     component: () => import(/* webpackChunkName: "about" */ '../views/Createpost.vue'),
     props:true
+  },
+  {
+    path: '/comment/:titel',
+    name: 'Comment',
+    component: () => import('../views/Comment.vue'),
+    prop:true
   }
 ]
 

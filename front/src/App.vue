@@ -13,11 +13,20 @@ export default {
     Navbar
   },
   created(){
+    if (localStorage.uid && localStorage.name){
+       let user = {
+          uid: "",
+          name: "",
+        };
+        user.uid = localStorage.uid
+        user.name = localStorage.name
+        this.setUser(user);
+     }
     this.getNewsFromApi();
     this.getPostFromApi();
   },
   methods:{
-    ...mapActions(['getNewsFromApi','getPostFromApi'])
+    ...mapActions(['getNewsFromApi','getPostFromApi','setUser']),
   }
 }
 </script>
