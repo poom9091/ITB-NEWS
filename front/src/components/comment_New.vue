@@ -1,7 +1,45 @@
 <template>
   <div class=" my-auto">
-    <div v-if="isLoad" class=" border-gray-500 rounded-md border-2  divide-y ">
-      <div class="p-4 px-6">
+    <div v-if="isLoad" class=" divide-y">
+      <div
+        :style="{
+          backgroundImage:
+            ' linear-gradient(to bottom, rgba(230, 243, 255,0.2),rgba(1, 1, 1, 0.6), rgba(1, 1, 1, 1)),url(' +
+            detail.newimg +
+            ')',
+        }"
+        class=" h-72 bg-cover bg-top flex justify-end flex-col p-2 py-5 relative"
+      >
+        <div class=" text-white font-black text-2xl ">
+          {{ detail.newtitle }}
+        </div>
+        <div
+          class=" italic text-sm text-justify overflow-ellipsis  text-white truncate pr-20"
+        >
+          {{ detail.newdes }}
+        </div>
+        <button
+          v-on:click="goURL(detail.newurl)"
+          class=" absolute bottom-2 right-5 hover:bg-white p-1 rounded-lg text-white hover:text-black flex"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-8 w-8 "
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
+            />
+          </svg>
+        </button>
+      </div>
+
+      <div class="p-4 py-2  ">
         <div
           class=" flex-row flex justify-between text-sm font-thin text-gray-500 "
         >
@@ -9,61 +47,15 @@
           <div>{{ detail.time }}</div>
         </div>
         <div class="text-4xl font-bold   ">{{ detail.posttitle }}</div>
-      </div>
-      <div class="px-4 py-2 ">
-        <div class=" text-sm font-medium truncate ">{{ detail.newtitle }}</div>
-        <div class=" flex space-x-2 mt-2 relative">
-          <img :src="detail.newimg" class=" rounded-lg w-60 " />
-          <div class=" italic text-sm text-justify overflow-ellipsis px-6">
-            {{ detail.newdes }}
-          </div>
-          <div class=" flex flex-col space-y-2 px-3 w-80">
-            <button
-              v-on:click="goURL(detail.newurl)"
-              class="transition duration-200 ease-in-out flex space-x-1 bg-gray-400 p-2 rounded-md hover:bg-blue-400 text-white "
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class=" h-6 w-6 "
-                viewBox="0 0 20 20"
-                fill="currentColor"
-              >
-                <path
-                  d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"
-                />
-                <path
-                  d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"
-                />
-              </svg>
-              <div>Link</div>
-            </button>
-            <button
-              v-on:click="goURL(detail.newurl)"
-              class="transition duration-200 ease-in-out flex space-x-1 bg-gray-400 p-2 rounded-md hover:bg-blue-400 text-white "
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class=" h-6 w-6 "
-                viewBox="0 0 20 20"
-                fill="currentColor"
-              >
-                <path
-                  d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"
-                />
-                <path
-                  d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"
-                />
-              </svg>
-              <div>All post</div>
-            </button>
-          </div>
+        <div class=" py-2 ">
+          {{ detail.postdes }}
         </div>
       </div>
-      <div class=" p-6 overflow-ellipsis overflow-auto max-h-24">
-        {{ detail.postdes }}
-      </div>
-      <div class="flex justify-star space-x-14 px-3 py-1 align-middle">
-        <div class="flex justify-between w-10 space-x-2">
+
+      <div
+        class="flex space-x-2 px-4 py-3  divide-x-2  divide-gray-500 "
+      >
+        <div class="flex  space-x-2 px-2">
           <div>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -79,7 +71,8 @@
           <div>{{ detail.view }}</div>
           <div>Vote</div>
         </div>
-        <div class="flex justify-between w-10 space-x-2">
+
+        <div class="flex  space-x-2 px-2">
           <div>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -112,7 +105,7 @@ export default {
   detail: null,
   isLoad: false,
   methods: {
-      goURL(url) {
+    goURL(url) {
       window.location.href = url;
     },
   },
@@ -127,7 +120,6 @@ export default {
       .then((response) => {
         this.detail = response.data;
         console.log(this.detail);
-        this.isLoad = false;
         this.isLoad = true;
         this.$forceUpdate();
       })
