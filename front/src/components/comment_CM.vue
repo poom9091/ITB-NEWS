@@ -13,7 +13,10 @@
           </div>
         </div>
         <div v-if="comment.user_id === user.uid" class="flex space-x-2 px-2 ">
-          <button class="text-gray-400 hover:text-gray-800">
+          <button
+            class="text-gray-400 hover:text-gray-800"
+            v-on:click="geteditComment(comment._id)"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               class="h-5 w-5"
@@ -25,7 +28,10 @@
               />
             </svg>
           </button>
-          <button class="text-gray-400 hover:text-gray-800">
+          <button
+            class="text-gray-400 hover:text-gray-800"
+            v-on:click="delComment(comment)"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               class="h-5 w-5"
@@ -41,8 +47,28 @@
           </button>
         </div>
       </div>
-
-      <div class="px-5">
+      <div v-if="edit && comment_id_edit === comment._id" class="px-5">
+        <textarea
+          v-model="comment.desc"
+          class="px-2 py-1 border-2 border-dashed border-gray-300 w-full"
+          rows="2"
+        />
+        <div class="space-x-2 text-right">
+          <button
+            class="p-1 px-3 text-white rounded-md bg-blue-500 hover:bg-blue-800"
+            v-on:click="editComment(comment)"
+          >
+            Save
+          </button>
+          <button
+            class="p-1 px-3 text-white rounded-md bg-gray-500 hover:bg-gray-800"
+            v-on:click="this.edit = false"
+          >
+            Cancel
+          </button>
+        </div>
+      </div>
+      <div v-else class="px-5">
         {{ comment.desc }}
       </div>
     </div>
@@ -52,32 +78,62 @@
 import axios from "axios";
 import { mapGetters } from "vuex";
 export default {
+  data() {
+    return {
+      edit: false,
+      comment_id_edit: "",
+      comments: [],
+    };
+  },
   props: ["post_id"],
   isLoad: false,
   user: {},
-  comments: [],
+
   methods: {
     ...mapGetters(["getUID"]),
+    geteditComment(id) {
+      this.edit = true;
+      this.comment_id_edit = id;
+    },
+    async delComment(id) {
+      await axios.delete("http://127.0.0.1:81/createpost", id).finally(() => {
+        this.getAllComment();
+        // console.log(this.comments);
+      });
+    },
+    editComment(id) {
+      console.log(id);
+      this.edit = false;
+      this.comment_id_edit = null;
+      axios.post("http://127.0.0.1:81/createpost", id).finally(() => {
+        this.getAllComment();
+        console.log(this.comments);
+      });
+    },
+
+    async getAllComment() {
+      await axios
+        .get("https://api.jsonbin.io/b/607842b55b165e19f620b00b/2", {
+          headers: {
+            "secret-key":
+              "$2b$10$pJX92cjXZes3hSYfvlbp5e1xRhcBEEUNb3iGF8AAaXms5LFcB6mu2",
+          },
+        })
+        .then((response) => {
+          this.comments = response.data;
+          console.log(this.comments);
+          this.isLoad = true;
+          this.$forceUpdate();
+        })
+        .catch((error) => console.log(error));
+    },
   },
   mounted() {
     this.user = this.getUID();
     console.log(this.user);
   },
   async created() {
-    await axios
-      .get("https://api.jsonbin.io/b/607842b55b165e19f620b00b/1", {
-        headers: {
-          "secret-key":
-            "$2b$10$pJX92cjXZes3hSYfvlbp5e1xRhcBEEUNb3iGF8AAaXms5LFcB6mu2",
-        },
-      })
-      .then((response) => {
-        this.comments = response.data;
-        console.log(this.comments);
-        this.isLoad = true;
-        this.$forceUpdate();
-      })
-      .catch((error) => console.log(error));
+    this.getAllComment();
   },
 };
 </script>

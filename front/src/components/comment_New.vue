@@ -68,8 +68,18 @@
           >
           </textarea>
           <div class="space-x-2 text-right">
-            <button class="p-1 px-3 text-white rounded-md bg-blue-500 hover:bg-blue-800" v-on:click="editPost()" >Save</button>
-            <button class="p-1 px-3 text-white rounded-md bg-gray-500 hover:bg-gray-800" v-on:click="this.edit = false" >Cancel</button>
+            <button
+              class="p-1 px-3 text-white rounded-md bg-blue-500 hover:bg-blue-800"
+              v-on:click="editPost()"
+            >
+              Save
+            </button>
+            <button
+              class="p-1 px-3 text-white rounded-md bg-gray-500 hover:bg-gray-800"
+              v-on:click="this.edit = false"
+            >
+              Cancel
+            </button>
           </div>
         </div>
       </div>
@@ -130,7 +140,10 @@
               </svg>
               <div>Edit</div>
             </button>
-            <button class="text-gray-400 hover:text-gray-800 flex space-x-1">
+            <button
+              class="text-gray-400 hover:text-gray-800 flex space-x-1"
+              v-on:click="deletePost(detail)"
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 class="h-5 w-5"
@@ -173,33 +186,41 @@ export default {
     goURL(url) {
       window.location.href = url;
     },
-    async editPost(){
+    async deletePost(comment) {
+      console.log(comment);
+      await axios
+        .delete("http://127.0.0.1:81/createpost", comment)
+        .finally(() => {
+          this.$router.push("/board");
+        });
+    },
+    async editPost() {
       // console.log(this.detail);
       // this.isLoad = false;
       this.edit = false;
       this.$forceUpdate();
       await axios
         .post("http://127.0.0.1:81/createpost", this.detail)
-        .finally(() =>{
-          this.getNew()
+        .finally(() => {
+          this.getNew();
           console.log(this.detail);
-        })
+        });
     },
-    async getNew(){
+    async getNew() {
       await axios
-      .get("https://api.jsonbin.io/b/6076d93d0ed6f819beac0f9f/1", {
-        headers: {
-          "secret-key":
-            "$2b$10$pJX92cjXZes3hSYfvlbp5e1xRhcBEEUNb3iGF8AAaXms5LFcB6mu2",
-        },
-      })
-      .then((response) => {
-        this.detail = response.data;
-        console.log(this.detail);
-        this.isLoad = true;
-        this.$forceUpdate();
-      })
-      .catch((error) => console.log(error));
+        .get("https://api.jsonbin.io/b/6076d93d0ed6f819beac0f9f/1", {
+          headers: {
+            "secret-key":
+              "$2b$10$pJX92cjXZes3hSYfvlbp5e1xRhcBEEUNb3iGF8AAaXms5LFcB6mu2",
+          },
+        })
+        .then((response) => {
+          this.detail = response.data;
+          console.log(this.detail);
+          this.isLoad = true;
+          this.$forceUpdate();
+        })
+        .catch((error) => console.log(error));
     },
     ...mapGetters(["getUID"]),
   },
