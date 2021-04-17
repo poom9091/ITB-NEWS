@@ -59,6 +59,7 @@ export default createStore({
         commit("setLoad",false)
       console.log(n)   
     },
+    
     async getPostFromApi({commit}){
       await axios.get(apipost,
         {
