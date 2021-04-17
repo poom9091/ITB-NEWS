@@ -5,7 +5,7 @@
     </div>
     <div class="-y-0 flex-col flex">
         <textarea
-        v-model="this.pdes"
+        v-model="comment"
         placeholder="What are your thoughts"
         rows="3"
         id="title"
@@ -13,18 +13,41 @@
         
         />
         <div class=" bg-blue-100 p-2 py-1 text-right ">
-            <button class="p-1 px-4 bg-gray-800 rounded-full text-white hover:bg-gray-600 ">Comment</button>
+            <button v-if="!comment" class="p-1 px-4 bg-gray-400 rounded-full text-white max-w-max">Comment</button>
+            <button v-else v-on:click="setComment()" class="p-1 px-4 bg-gray-800 rounded-full text-white hover:bg-gray-600 ">Comment</button>
         </div>
     </div>
   </div>
 </template>
 <script>
+import axios from "axios";
 import { mapGetters } from "vuex";
 export default {
-  props: ["title"],
+  props: ["post_id"],
+  data(){
+    return{
+      comment:'',
+
+    }
+  },
   user: {},
   methods: {
     ...mapGetters(["getUID"]),
+    setComment(){
+      let THtime = new Date().toLocaleString("th-TH",{year: 'numeric', month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit'})
+      let commentdata = {
+        user_id:this.user.uid,
+        username:this.user.name,
+        dsec:this.comment,
+        post_id:this.post_id,
+        time:THtime,
+      }
+      console.log(commentdata);
+      axios
+        .post("http://127.0.0.1:81/createpost", commentdata)
+        // .then((response) => (console.log(response.data)));
+
+    }
   },
   created() {
     this.user = this.getUID();

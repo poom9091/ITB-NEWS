@@ -52,7 +52,7 @@
 import axios from "axios";
 import { mapGetters } from "vuex";
 export default {
-  props: ["title"],
+  props: ["post_id"],
   isLoad: false,
   user: {},
   comments: [],

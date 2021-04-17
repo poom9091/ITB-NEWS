@@ -1,8 +1,8 @@
 <template lang="">
   <div class="mt-24 mb-10 w-8/12 mx-auto border-gray-500 rounded-md  divide-y ">
-    <news :title="this._id" class="border-r-2 border-l-2" />
-    <createcm :title="this._id" />
-    <comment :title="this._id" />
+    <news :post_id="this._id" class="border-r-2 border-l-2" />
+    <createcm :post_id="this._id" />
+    <comment :post_id="this._id" />
   </div>
 </template>
 
