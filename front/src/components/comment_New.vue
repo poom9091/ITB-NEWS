@@ -18,6 +18,7 @@
         >
           {{ detail.newdes }}
         </div>
+
         <button
           v-on:click="goURL(detail.newurl)"
           class=" absolute bottom-2 right-5 hover:bg-white p-1 rounded-lg text-white hover:text-black flex"
@@ -46,14 +47,35 @@
           <div>Posted by {{ detail.username }}</div>
           <div>{{ detail.time }}</div>
         </div>
-        <div class="text-4xl font-bold   ">{{ detail.posttitle }}</div>
-        <div class=" py-2 ">
-          {{ detail.postdes }}
+        <div v-if="!edit">
+          <div class="text-4xl font-bold   ">{{ detail.posttitle }}</div>
+          <div class=" py-2 ">
+            {{ detail.postdes }}
+          </div>
+        </div>
+
+        <div v-else>
+          <textarea
+            class="text-4xl font-bold border-gray-400 border-2 rounded-md border-dashed px-2 py-1 w-full "
+            v-model="detail.posttitle"
+            rows="2"
+          >
+          </textarea>
+          <textarea
+            class=" py-2 px-2 w-full mt-2 border-2 rounded-md border-dashed border-gray-400   "
+            v-model="detail.postdes"
+            rows="4"
+          >
+          </textarea>
+          <div class="space-x-2 text-right">
+            <button class="p-1 px-3 text-white rounded-md bg-blue-500 hover:bg-blue-800" v-on:click="editPost()" >Save</button>
+            <button class="p-1 px-3 text-white rounded-md bg-gray-500 hover:bg-gray-800" v-on:click="this.edit = false" >Cancel</button>
+          </div>
         </div>
       </div>
 
-      <div class="flex justify-between space-x-2 px-4 py-3   ">
-        <div  class="flex divide-x-2 divide-gray-500" >
+      <div v-if="!edit" class="flex justify-between space-x-2 px-4 py-3   ">
+        <div class="flex divide-x-2 divide-gray-500">
           <div class="flex space-x-2 px-2">
             <div>
               <svg
@@ -90,9 +112,12 @@
             <div>Comments</div>
           </div>
         </div>
-        <div v-if="detail.user_id=== user.uid">
+        <div v-if="detail.user_id === user.uid">
           <div class="flex space-x-3 px-2 ">
-            <button class="text-gray-400 hover:text-gray-800 flex space-x-1">
+            <button
+              class="text-gray-400 hover:text-gray-800 flex space-x-1"
+              v-on:click="this.edit = true"
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 class="h-5 w-5"
@@ -134,19 +159,34 @@
 import axios from "axios";
 import { mapGetters } from "vuex";
 export default {
+  data() {
+    return {
+      edit: false,
+      detail: null,
+      isLoad: false,
+    };
+  },
   props: ["post_id"],
-  detail: null,
   user: {},
-  isLoad: false,
+
   methods: {
     goURL(url) {
       window.location.href = url;
     },
-    ...mapGetters(["getUID"])
-  },
-  async created() {
-    this.user = this.getUID();
-    await axios
+    async editPost(){
+      // console.log(this.detail);
+      // this.isLoad = false;
+      this.edit = false;
+      this.$forceUpdate();
+      await axios
+        .post("http://127.0.0.1:81/createpost", this.detail)
+        .finally(() =>{
+          this.getNew()
+          console.log(this.detail);
+        })
+    },
+    async getNew(){
+      await axios
       .get("https://api.jsonbin.io/b/6076d93d0ed6f819beac0f9f/1", {
         headers: {
           "secret-key":
@@ -160,6 +200,12 @@ export default {
         this.$forceUpdate();
       })
       .catch((error) => console.log(error));
+    },
+    ...mapGetters(["getUID"]),
+  },
+  created() {
+    this.user = this.getUID();
+    this.getNew();
   },
 };
 </script>
