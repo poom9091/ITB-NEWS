@@ -1,10 +1,19 @@
 <template>
-  <div v-if="!isLoading_post" class=" px-3">
+  <div v-if="!isLoading_post" class="">
     <div
       v-for="p in posts"
       :key="p.index"
       class=" bg-white rounded-xl border-4 hover:border-black divide-y "
     >
+      <div class="p-2 px-3 border-b-2  ">
+        <div
+          class=" flex-row flex justify-between  text-sm font-thin text-gray-700"
+        >
+          <div>Posted by <button class="underline" @click="go_profile(p.user_id,p.username)">{{ p.username }}</button></div>
+          <div>{{ p.time }}</div>
+        </div>
+        <div class="text-2xl font-bold   ">{{ p.posttitle }}</div>
+      </div>
       <router-link
         :to="{
           name: 'Comment',
@@ -12,18 +21,8 @@
             _id: p._id,
           },
         }"
-        class="divide-y"
       >
-        <div class="p-2 px-3">
-          <div
-            class=" flex-row flex justify-between  text-sm font-thin text-gray-700"
-          >
-            <div>Posted by {{ p.username }}</div>
-            <div>{{ p.time }}</div>
-          </div>
-          <div class="text-2xl font-bold   ">{{ p.posttitle }}</div>
-        </div>
-        <div class="px-4 py-2 ">
+        <div class="px-4 py-2  border-b-2">
           <div class=" text-sm font-medium truncate ">{{ p.newtitle }}</div>
           <div class=" flex space-x-2 mt-2 relative">
             <img :src="p.newimg" class=" rounded-lg w-60 " />
@@ -102,6 +101,13 @@
           </div>
         </div>
         <div class="flex w-max max-w-max space-x-2">
+          <button v-on:click="go_topic(p.newtitle)" class="transition duration-200 ease-in-out flex space-x-2 bg-gray-400 p-2 rounded-md hover:bg-blue-400 text-white">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                <path d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2h-1.528A6 6 0 004 9.528V4z" />
+                <path fill-rule="evenodd" d="M8 10a4 4 0 00-3.446 6.032l-1.261 1.26a1 1 0 101.414 1.415l1.261-1.261A4 4 0 108 10zm-2 4a2 2 0 114 0 2 2 0 01-4 0z" clip-rule="evenodd" />
+              </svg>
+              <div class=" max-w-max w-max">Topic New</div>
+            </button>
           <button
             v-on:click="goURL(p.newurl)"
             class="transition duration-200 ease-in-out flex space-x-2 bg-gray-400 p-2 rounded-md hover:bg-blue-400 text-white  "
@@ -124,6 +130,7 @@
         </div>
       </div>
     </div>
+    
   </div>
   <div v-else>
     <div>Loading....</div>
@@ -145,6 +152,9 @@ export default {
   methods: {
     ...mapGetters(["getUID"]),
     ...mapActions(["getPostFromApi"]),
+    go_profile(uid,name){
+      this.$router.push(({ path: `/board/profile/${uid}/${name}` }))
+    },
     goURL(url) {
       window.location.href = url;
     },
@@ -183,6 +193,9 @@ export default {
         this.getPostFromApi();
       });
     },
+     go_topic(newTopic){   
+      this.$router.push(({ path: `/board/topic_news/${newTopic}`}))
+    }
   },
   mounted() {
     this.user = this.getUID();
