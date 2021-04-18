@@ -2,7 +2,7 @@ import axios from "axios";
 import { createStore } from "vuex";
 
 let urlnew="https://newsapi.org/v2/top-headlines?country=us&category=technology&apiKey=380094e98a684b578fa885b235439b36"
-let apipost="https://api.jsonbin.io/b/6072cbe55b165e19f61cbc91/3"
+let apipost="https://api.jsonbin.io/b/6072cbe55b165e19f61cbc91/6"
 
 export default createStore({
   state: {

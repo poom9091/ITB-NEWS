@@ -26,7 +26,24 @@ const routes = [
   {
     path: '/board',
     name: 'Board',
-    component: () => import(/* webpackChunkName: "about" */ '../views/Board.vue')
+    component: () => import(/* webpackChunkName: "about" */ '../views/Board.vue'),
+    children:[
+      {
+        name:'Board_profile',
+        path:'profile/:uid/:name',
+        component: () => import(/* webpackChunkName: "about" */ '../components/all_post_profile'),
+        props:true
+      },
+      {
+        path:'topic_news/:topic',
+        component: () => import(/* webpackChunkName: "about" */ '../components/all_post_topic'),
+        props:true
+      },
+      {
+        path:'',
+        component: () => import('../components/all_post')
+      },
+    ]
   },
   {
     path: '/news',
