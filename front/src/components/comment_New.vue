@@ -85,8 +85,33 @@
       </div>
 
       <div v-if="!edit" class="flex justify-between space-x-2 px-4 py-3   ">
-        <div class="flex divide-x-2 divide-gray-500">
-          <div class="flex space-x-2 px-2">
+        <div class="flex divide-x-2 space-x-3 divide-gray-500">
+         <button
+            v-if="detail.vote.includes(user.uid)"
+            v-on:click="dislinkcomment(detail)"
+            class="flex justify-between space-x-3 hover:bg-gray-300 max-w-max w-max p-2 rounded-md "
+          >
+            <div>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-5 w-5 text-blue-400"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+              >
+                <path
+                  d="M2 10.5a1.5 1.5 0 113 0v6a1.5 1.5 0 01-3 0v-6zM6 10.333v5.43a2 2 0 001.106 1.79l.05.025A4 4 0 008.943 18h5.416a2 2 0 001.962-1.608l1.2-6A2 2 0 0015.56 8H12V4a2 2 0 00-2-2 1 1 0 00-1 1v.667a4 4 0 01-.8 2.4L6.8 7.933a4 4 0 00-.8 2.4z"
+                />
+              </svg>
+            </div>
+            <div>{{ detail.vote.length }}</div>
+            <div>Vote</div>
+          </button>
+
+          <button
+            v-else
+            v-on:click="linkcomment(detail)"
+            class="flex justify-between space-x-2 hover:bg-gray-300 max-w-max w-max p-2 rounded-md "
+          >
             <div>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -99,11 +124,12 @@
                 />
               </svg>
             </div>
-            <div>{{ detail.view }}</div>
+            <div></div>
+            <div>{{ detail.vote.length }}</div>
             <div>Vote</div>
-          </div>
+          </button>
 
-          <div class="flex  space-x-2 px-2">
+          <div class="flex space-x-3 max-w-max w-max p-2 ">
             <div>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -118,7 +144,7 @@
                 />
               </svg>
             </div>
-            <div>{{ detail.vote }}</div>
+            <div>{{ detail.view }}</div>
             <div>Comments</div>
           </div>
         </div>
@@ -170,7 +196,7 @@
 
 <script>
 import axios from "axios";
-import { mapGetters } from "vuex";
+import { mapGetters} from "vuex";
 export default {
   data() {
     return {
@@ -206,9 +232,42 @@ export default {
           console.log(this.detail);
         });
     },
+    linkcomment(detail) {
+      if (this.user.uid.length == 0) {
+        var r = confirm("กรุณา Login ก่อนถึงใช้งาน Feature นี้ได้");
+        if (r == true) {
+          this.$router.push("/login");
+        }
+      } else {
+        let linkcomment = {
+          _id: detail._id,
+          uid: this.user.uid,
+        };
+        detail.vote.push(this.user.uid);
+        console.log(detail);
+        axios.put("http://127.0.0.1:81/createpost", linkcomment).finally(() => {
+          this.getNew() ;
+        });
+      }
+    },
+    dislinkcomment(detail) {
+      let linkcomment = {
+        _id: detail._id,
+        uid: this.user.uid,
+      };
+      var index = detail.vote.indexOf(this.user.uid);
+      if (index > -1) {
+        detail.vote.splice(index, 1);
+      }
+      // p.vote.pop(this.user.uid);
+      console.log(detail);
+      axios.put("http://127.0.0.1:81/createpost", linkcomment).finally(() => {
+        this.getNew() ;
+      });
+    },
     async getNew() {
       await axios
-        .get("https://api.jsonbin.io/b/6076d93d0ed6f819beac0f9f/1", {
+        .get("https://api.jsonbin.io/b/6076d93d0ed6f819beac0f9f/2", {
           headers: {
             "secret-key":
               "$2b$10$pJX92cjXZes3hSYfvlbp5e1xRhcBEEUNb3iGF8AAaXms5LFcB6mu2",

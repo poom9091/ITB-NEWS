@@ -1,5 +1,5 @@
 <template lang="">
-  <div class="p-4 flex flex-col space-y-2">
+  <div v-if="user.name" class="p-4 flex flex-col space-y-2">
     <div>
       Comment as <b class="text-blue-500">{{ user.name }}</b>
     </div>
@@ -18,6 +18,10 @@
         </div>
     </div>
   </div>
+  <div v-else class="text-center py-4 space-y-2">
+    <div class="italic">You can not comment plase Login</div>
+    <button v-on:click="this.$router.push('/login')" class="text-white px-3 py-1 bg-blue-500 rounded-md italic">Login to start</button>
+  </div>
 </template>
 <script>
 import axios from "axios";
@@ -33,6 +37,7 @@ export default {
   user: {},
   methods: {
     ...mapGetters(["getUID"]),
+    
     setComment(){
       let THtime = new Date().toLocaleString("th-TH",{year: 'numeric', month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit'})
       let commentdata = {

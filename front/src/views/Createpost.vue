@@ -53,7 +53,11 @@
 import axios from "axios";
 import {mapGetters} from "vuex"
 export default {
-
+  data(){
+    return{
+      user:''
+    }
+  },
   title: '',
   img: 'start',
   des: '',
@@ -72,8 +76,17 @@ export default {
       this.$router.push('/')
 
     }
-    console.log(this.getUID().uid);
-    console.log(this.getUID().name);
+    this.user = this.getUID()
+    
+  },
+  mounted() {
+    console.log(this.user.uid);
+    console.log(this.user.name);
+    if (this.user.uid.length==0){
+      var r = confirm("กรุณา Login ก่อนสร้าง Post")
+      if (r == true) {this.$router.push('/login')}
+      else {this.$router.push('/news')}
+    }
   },
 
   methods:{
