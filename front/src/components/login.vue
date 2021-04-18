@@ -61,7 +61,6 @@ export default {
           console.log(error);
         });
       this.setUser(user);
-      this.$session.start()
       localStorage.uid = user.uid
       localStorage.name = user.name
       this.$router.push("/");

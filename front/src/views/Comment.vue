@@ -7,6 +7,7 @@
 </template>
 
 <script>
+
 import comment from "../components/comment_CM";
 import news from "../components/comment_New";
 import createcm from "../components/Create_cm"

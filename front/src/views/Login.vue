@@ -16,7 +16,7 @@ import { mapState } from "vuex";
 // import VFacebookLogin from 'vue-facebook-login-component'
 export default {
   mounted() {
-    if(this.user.uid.length > 0){
+    if(this.user.uid != null){
       console.log(this.user.uid.length);
       this.$router.push("/");
     }

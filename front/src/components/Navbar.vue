@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="flex bg-blue-500 py-4 text-white justify-between  px-7 ">
+    <div class="flex bg-blue-500 py-4 text-white justify-between  px-7">
       <div class=" font-extrabold text-3xl my-auto">
         <router-link to="/">ITB-NEWS</router-link>
       </div>
@@ -19,7 +19,7 @@
           >News Today</router-link
         >
         <router-link
-          v-if="this.user.uid.length == 0"
+          v-if=" this.user.uid == null"
           class="transition duration-300 ease-in-out p-2 rounded-xl
                         bg-white text-blue-500 px-3 border-4 border-blue-600
                         hover:bg-blue-600 hover:text-white "
@@ -27,7 +27,7 @@
           >Login</router-link
         >
 
-        <router-link
+        <!-- <router-link
           v-else
           class="transition duration-300 ease-in-out p-2 rounded-xl flex space-x-2
                         bg-white text-blue-500 px-3 border-4 border-blue-600
@@ -49,8 +49,8 @@
               d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"
             />
           </svg>
-        </router-link>
-
+        </router-link> -->
+        <profile_d v-else />
       </div>
 
     </div>
@@ -59,8 +59,12 @@
 
 <script>
 import { mapState } from "vuex";
+import profile_d from "../components/Profile_dropdown"
 export default {
   name: "Navbar",
+  components:{
+    profile_d
+  },
   computed: {
     ...mapState(["user"]),
   },
