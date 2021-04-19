@@ -83,19 +83,23 @@ export default {
       edit: false,
       comment_id_edit: "",
       comments: [],
+      user: {
+        uid:'',
+        name:''
+      },
     };
   },
   props: ["post_id"],
   isLoad: false,
-  user: {},
-
   methods: {
     ...mapGetters(["getUID"]),
+
     geteditComment(id) {
       this.edit = true;
       this.comment_id_edit = id;
     },
     async delComment(id) {
+      //api comment
       await axios.delete("http://127.0.0.1:81/createpost", id).finally(() => {
         this.getAllComment();
         // console.log(this.comments);
@@ -105,7 +109,8 @@ export default {
       console.log(id);
       this.edit = false;
       this.comment_id_edit = null;
-      axios.post("http://127.0.0.1:81/createpost", id).finally(() => {
+      //api comment
+      axios.put("http://127.0.0.1:81/createpost", id).finally(() => {
         this.getAllComment();
         console.log(this.comments);
       });
@@ -113,6 +118,7 @@ export default {
 
     async getAllComment() {
       await axios
+        //api comment
         .get("https://api.jsonbin.io/b/607842b55b165e19f620b00b/2", {
           headers: {
             "secret-key":

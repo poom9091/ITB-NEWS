@@ -49,6 +49,7 @@ export default {
       }
       console.log(commentdata);
       axios
+        // get comment
         .post("http://127.0.0.1:81/createpost", commentdata)
         // .then((response) => (console.log(response.data)));
 

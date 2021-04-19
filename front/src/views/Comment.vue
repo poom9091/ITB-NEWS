@@ -18,7 +18,7 @@ export default {
     news,
     createcm
   },
-  beforeCreate() {
+  created()  {
     this._id = this.$route.params._id;
   },
 };

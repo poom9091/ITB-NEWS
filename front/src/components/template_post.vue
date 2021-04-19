@@ -175,6 +175,7 @@ export default {
         };
         p.vote.push(this.user.uid);
         console.log(p);
+        // api comment
         axios.put("http://127.0.0.1:81/createpost", linkcomment).finally(() => {
           this.getPostFromApi();
         });
@@ -191,6 +192,7 @@ export default {
       }
       // p.vote.pop(this.user.uid);
       console.log(p);
+      // api comment
       axios.put("http://127.0.0.1:81/createpost", linkcomment).finally(() => {
         this.getPostFromApi();
       });

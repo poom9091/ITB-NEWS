@@ -109,6 +109,7 @@ export default {
         posttitle : this.ptitle,
         postdes : this.pdes
       };
+      // api crate post
       axios
         .post("http://127.0.0.1:81/createpost", newinfo)
         .then((response) => (this.newinfo = response.data));

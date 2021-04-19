@@ -2,6 +2,8 @@ import axios from "axios";
 import { createStore } from "vuex";
 
 let urlnew="https://newsapi.org/v2/top-headlines?country=us&category=technology&apiKey=380094e98a684b578fa885b235439b36"
+
+// Get all post
 let apipost="https://api.jsonbin.io/b/6072cbe55b165e19f61cbc91/6"
 
 export default createStore({
@@ -71,13 +73,17 @@ export default createStore({
       console.log(n)   
     },
     
+    // ใช้
     async getPostFromApi({commit}){
+      // ของ เว็บ
       await axios.get(apipost,
         {
           headers:{
             "secret-key":"$2b$10$pJX92cjXZes3hSYfvlbp5e1xRhcBEEUNb3iGF8AAaXms5LFcB6mu2"
           }
         })
+      // ของเราเอง
+      // await axios.get(apipost)
       .then((response)=>{
         commit('setPost',response.data)
         commit('setLoadPost',false)

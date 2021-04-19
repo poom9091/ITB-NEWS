@@ -215,6 +215,7 @@ export default {
     async deletePost(comment) {
       console.log(comment);
       await axios
+        // delete Post api
         .delete("http://127.0.0.1:81/createpost", comment)
         .finally(() => {
           this.$router.push("/board");
@@ -226,7 +227,8 @@ export default {
       this.edit = false;
       this.$forceUpdate();
       await axios
-        .post("http://127.0.0.1:81/createpost", this.detail)
+      // edit Post api
+        .put("http://127.0.0.1:81/createpost", this.detail)
         .finally(() => {
           this.getNew();
           console.log(this.detail);
@@ -245,6 +247,7 @@ export default {
         };
         detail.vote.push(this.user.uid);
         console.log(detail);
+        // comment api
         axios.put("http://127.0.0.1:81/createpost", linkcomment).finally(() => {
           this.getNew() ;
         });
@@ -265,6 +268,7 @@ export default {
         this.getNew() ;
       });
     },
+
     async getNew() {
       await axios
         .get("https://api.jsonbin.io/b/6076d93d0ed6f819beac0f9f/2", {
@@ -284,6 +288,7 @@ export default {
     ...mapGetters(["getUID"]),
   },
   created() {
+    console.log(this.post_id)
     this.user = this.getUID();
     this.getNew();
   },
