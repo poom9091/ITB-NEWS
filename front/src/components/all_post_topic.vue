@@ -1,11 +1,13 @@
 <template>
-  <div v-if="!isLoading_post" class="">
-    <div
-      v-for="p in posts"
-      :key="p.index"
-      class=" bg-white rounded-xl border-4 hover:border-black divide-y "
-    >
-      <template_post class="" :p="p" :user="user" />
+  <div v-if="!isLoading_post" class=" ">
+
+    <div v-for="p in posts" :key="p.index">
+      <div
+        v-if="p.newtitle === topic"
+        class=" bg-white rounded-xl border-4 hover:border-black flex-col flex divide-y  "
+      >
+        <template_post class="" :p="p" :user="user" />
+      </div>
     </div>
   </div>
   <div v-else>
@@ -18,13 +20,14 @@ import { mapState, mapGetters, mapActions } from "vuex";
 import template_post from "../components/template_post";
 
 export default {
+  props: ["topic"],
   data() {
     return {
       user: "",
     };
   },
-  components: {
-    template_post,
+  components:{
+    template_post
   },
   computed: {
     ...mapState(["posts", "isLoading_post"]),
@@ -35,7 +38,8 @@ export default {
   },
   mounted() {
     this.user = this.getUID();
-    console.log(this.posts);
+    // console.log(this.posts);
+    console.log(this.topic);
   },
 };
 </script>

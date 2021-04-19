@@ -9,7 +9,7 @@
         </button>
         <button v-if="isOpen" @click="isOpen=false" class="fixed top-0 right-0 bottom-0 left-0 h-full w-full " ></button>
         <div v-if="isOpen" class=" absolute right-0 mt-2 py-3  w-44 bg-white rounded-md shadow-xl space-y-2">
-            <a href="#" class="block text-gray-900 text-base hover:bg-blue-600 px-4 py-2 hover:text-white">{{ user.name }}</a>
+            <a href="#" @click="go_profile(user.uid,user.name)" class="block text-gray-900 text-base hover:bg-blue-600 px-4 py-2 hover:text-white">{{ user.name }}</a >
             <a href="#" @click="logout()" class="block text-gray-900 text-base hover:bg-blue-600 px-4 py-2 hover:text-white">Sign out</a>
         </div>
     </div>
@@ -31,6 +31,11 @@ export default {
             localStorage.removeItem('uid');
             localStorage.removeItem('name');
             this.$router.push("/");
+        },
+        go_profile(uid,name){
+            // this.$router.push("/board/profile/"+uid);
+            this.isOpen = false
+            this.$router.push(({ path: `/board/profile/${uid}/${name}` }))
         }
     },
     created() {
