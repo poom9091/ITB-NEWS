@@ -3,8 +3,9 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import './index.css'
-
 import firebase from 'firebase'
+// import VueComp from '@vue/composition-api';
+
 
 var firebaseConfig = {
     apiKey: "AIzaSyCu3deYnDmHQvl5EgshcgdU6vXVZowTqwU",
