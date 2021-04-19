@@ -86,7 +86,7 @@
 
       <div v-if="!edit" class="flex justify-between space-x-2 px-4 py-3   ">
         <div class="flex divide-x-2 space-x-3 divide-gray-500">
-         <button
+          <button
             v-if="detail.vote.includes(user.uid)"
             v-on:click="dislinkcomment(detail)"
             class="flex justify-between space-x-3 hover:bg-gray-300 max-w-max w-max p-2 rounded-md "
@@ -196,7 +196,7 @@
 
 <script>
 import axios from "axios";
-import { mapGetters} from "vuex";
+import { mapGetters } from "vuex";
 export default {
   data() {
     return {
@@ -215,7 +215,7 @@ export default {
     async deletePost(comment) {
       console.log(comment);
       await axios
-        .delete("http://127.0.0.1:81/createpost", comment)
+        .delete("http://127.0.0.1:81/delpost/" + this.post_id)
         .finally(() => {
           this.$router.push("/board");
         });
@@ -226,7 +226,7 @@ export default {
       this.edit = false;
       this.$forceUpdate();
       await axios
-        .post("http://127.0.0.1:81/createpost", this.detail)
+        .put("http://127.0.0.1:81/editpost/" + this.post_id, this.detail)
         .finally(() => {
           this.getNew();
           console.log(this.detail);
@@ -246,7 +246,7 @@ export default {
         detail.vote.push(this.user.uid);
         console.log(detail);
         axios.put("http://127.0.0.1:81/createpost", linkcomment).finally(() => {
-          this.getNew() ;
+          this.getNew();
         });
       }
     },
@@ -262,17 +262,14 @@ export default {
       // p.vote.pop(this.user.uid);
       console.log(detail);
       axios.put("http://127.0.0.1:81/createpost", linkcomment).finally(() => {
-        this.getNew() ;
+        this.getNew();
       });
     },
     async getNew() {
+      let post_id1 = { _id: this.post_id };
+      await console.log(post_id1);
       await axios
-        .get("https://api.jsonbin.io/b/6076d93d0ed6f819beac0f9f/2", {
-          headers: {
-            "secret-key":
-              "$2b$10$pJX92cjXZes3hSYfvlbp5e1xRhcBEEUNb3iGF8AAaXms5LFcB6mu2",
-          },
-        })
+        .get("http://127.0.0.1:81/gpost/" + this.post_id)
         .then((response) => {
           this.detail = response.data;
           console.log(this.detail);
