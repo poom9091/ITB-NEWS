@@ -1,7 +1,10 @@
 <template>
   <div class=" h-full pt-24 pb-10">
-    <div class=" border-blue-800 border-4 rounded-md font  max-w-2xl mx-auto p-6 shadow-2xl">
+    <div
+      class=" border-blue-800 border-4 rounded-md font  max-w-2xl mx-auto p-6 shadow-2xl"
+    >
       <div class=" text-3xl  text-blue-700 font-extrabold">Create Post</div>
+
       <div class="flex flex-col space-y-4 py-2 justify-around">
         <div class=" text-2xl font-semibold ">{{ this.title }}</div>
         <img :src="this.img" class="rounded-xl w-96 m-auto shadow-lg " />
@@ -32,7 +35,10 @@
           />
         </div>
         <div class=" flex flex-row space-x-3 justify-end">
-          <div v-if="!this.ptitle" class="transition duration-200 border-2 border-gray-600 bg-gray-400  p-3 py-2 rounded-lg text-white text-base font-semibold">
+          <div
+            v-if="!this.ptitle"
+            class="transition duration-200 border-2 border-gray-600 bg-gray-400  p-3 py-2 rounded-lg text-white text-base font-semibold"
+          >
             Create
           </div>
           <button
@@ -43,7 +49,7 @@
             Create
           </button>
           <button
-            v-on:click="this.$router.push({ path:'/news' })"
+            v-on:click="this.$router.push({ path: '/news' })"
             class="transition duration-200 border-2 border-gray-600  p-3 py-2 rounded-lg  text-base font-semibold bg-white text-black transform  hover:-translate-y-1 hover:scale-110"
           >
             Cancle
@@ -56,58 +62,58 @@
 
 <script>
 import axios from "axios";
-import {mapGetters} from "vuex"
+import { mapGetters } from "vuex";
 export default {
-  data(){
-    return{
-      user:'',
-      ptitle:'',
-    }
+  data() {
+    return {
+      user: "",
+      ptitle: "",
+    };
   },
-  title: '',
-  img: 'start',
-  des: '',
-  url: '',
-  time: '',
-  
-  pdes:'',
-  created(){
-    
-    this.title = this.$route.params.title
-    this.img = this.$route.params.img
-    this.des = this.$route.params.des
-    this.url = this.$route.params.url
-    this.time = this.$route.params.time
-    if(this.url==null){
-      this.$router.push('/')
+  title: "",
+  img: "start",
+  des: "",
+  url: "",
+  time: "",
 
+  pdes: "",
+  created() {
+    this.title = this.$route.params.title;
+    this.img = this.$route.params.img;
+    this.des = this.$route.params.des;
+    this.url = this.$route.params.url;
+    this.time = this.$route.params.time;
+    if (this.url == null) {
+      this.$router.push("/");
     }
-    this.user = this.getUID()
-    
+    this.user = this.getUID();
   },
   mounted() {
     console.log(this.user.uid);
     console.log(this.user.name);
-    if (this.user.uid.length==0){
-      var r = confirm("กรุณา Login ก่อนสร้าง Post")
-      if (r == true) {this.$router.push('/login')}
-      else {this.$router.push('/news')}
+    if (this.user.uid.length == 0) {
+      var r = confirm("กรุณา Login ก่อนสร้าง Post");
+      if (r == true) {
+        this.$router.push("/login");
+      } else {
+        this.$router.push("/news");
+      }
     }
   },
 
-  methods:{
-    ...mapGetters(['getUID']),
-    createpost(){
+  methods: {
+    ...mapGetters(["getUID"]),
+    createpost() {
       const newinfo = {
-        user_id:this.getUID().uid,
-        username:this.getUID().name,
-        newtitle : this.title,
-        newimg : this.img,
-        newdes : this.des,
-        newurl : this.url,
-        newtime : this.time,
-        posttitle : this.ptitle,
-        postdes : this.pdes
+        user_id: this.getUID().uid,
+        username: this.getUID().name,
+        newtitle: this.title,
+        newimg: this.img,
+        newdes: this.des,
+        newurl: this.url,
+        newtime: this.time,
+        posttitle: this.ptitle,
+        postdes: this.pdes,
       };
       axios
         .post("http://127.0.0.1:81/createpost", newinfo)
