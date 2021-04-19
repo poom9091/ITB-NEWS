@@ -1,11 +1,11 @@
 <template>
   <div class=" h-full pt-24 pb-10">
-    <div class=" border-blue-800 border-4 rounded-md  max-w-2xl mx-auto p-6 shadow-2xl">
-      <div class=" text-3xl font-semibold text-blue-700">Create Post</div>
+    <div class=" border-blue-800 border-4 rounded-md font  max-w-2xl mx-auto p-6 shadow-2xl">
+      <div class=" text-3xl  text-blue-700 font-extrabold">Create Post</div>
       <div class="flex flex-col space-y-4 py-2 justify-around">
-        <div class=" text-2xl font-semibold">{{ this.title }}</div>
+        <div class=" text-2xl font-semibold ">{{ this.title }}</div>
         <img :src="this.img" class="rounded-xl w-96 m-auto shadow-lg " />
-        <div class=" flex flex-row space-x-3 px-4">
+        <div class=" flex flex-row flex-wrap  px-4">
           <div
             id="topic"
             class=" max-w-max w-max  text-base font-medium my-auto"
@@ -19,7 +19,7 @@
             placeholder="Title"
           />
         </div>
-        <div class=" flex flex-row space-x-3 px-4">
+        <div class=" flex flex-row flex-wrap  px-4 content-start">
           <div id="des" class=" max-w-max w-max  text-base font-medium my-auto">
             Description
           </div>
@@ -32,13 +32,18 @@
           />
         </div>
         <div class=" flex flex-row space-x-3 justify-end">
+          <div v-if="!this.ptitle" class="transition duration-200 border-2 border-gray-600 bg-gray-400  p-3 py-2 rounded-lg text-white text-base font-semibold">
+            Create
+          </div>
           <button
+            v-else
             v-on:click="createpost()"
             class="transition duration-200 border-2 border-blue-600 bg-blue-400  p-3 py-2 rounded-lg text-white text-base font-semibold transform  hover:-translate-y-1  hover:scale-110"
           >
             Create
           </button>
           <button
+            v-on:click="this.$router.push({ path:'/news' })"
             class="transition duration-200 border-2 border-gray-600  p-3 py-2 rounded-lg  text-base font-semibold bg-white text-black transform  hover:-translate-y-1 hover:scale-110"
           >
             Cancle
@@ -55,7 +60,8 @@ import {mapGetters} from "vuex"
 export default {
   data(){
     return{
-      user:''
+      user:'',
+      ptitle:'',
     }
   },
   title: '',
@@ -63,7 +69,7 @@ export default {
   des: '',
   url: '',
   time: '',
-  ptitle:'',
+  
   pdes:'',
   created(){
     
@@ -93,8 +99,8 @@ export default {
     ...mapGetters(['getUID']),
     createpost(){
       const newinfo = {
-        uid:this.getUID().uid,
-        name:this.getUID().name,
+        user_id:this.getUID().uid,
+        username:this.getUID().name,
         newtitle : this.title,
         newimg : this.img,
         newdes : this.des,

@@ -10,7 +10,7 @@
           <div class="font-bold text-2xl text-black ">{{ n.title }}</div>
           <div class=" text-base text-black ">{{ n.description }}</div>
           <div class="text-right">
-            <div>{{ n.publishedAt }}</div>
+            <div class=" text-sm italic">Time : {{ n.publishedAt.slice(11,16)}} {{ n.publishedAt.slice(0,10)}} </div>
             <!-- <a :href="n.url" class="underline text-2xl">Link</a> -->
           </div>
           <div class="flex w-full justify-end space-x-5  ">
@@ -23,7 +23,7 @@
                     img: n.urlToImage,
                     des: n.description,
                     url: n.url,
-                    time: n.publishedAt,
+                    time: `${n.publishedAt.slice(11,16)} ${n.publishedAt.slice(0,10)}`,
                   },
                 }"
                 class=" transition duration-200 ease-in-out flex space-x-3  border-gray-400 border-2 p-3 rounded-md hover:bg-blue-400 hover:text-white"
@@ -47,6 +47,7 @@
                 <div class=" font-light">Create Board</div>
               </router-link>
               <button
+               @click="go_topic(n.title)"
                 class=" transition duration-200 ease-in-out flex space-x-3  border-gray-400 border-2 p-3 rounded-md hover:bg-blue-400 hover:text-white"
               >
                 <svg
@@ -97,13 +98,15 @@
 import { mapState } from "vuex";
 // import {mapState} from 'vuex';
 export default {
-  newshow:7,
   computed: {
     ...mapState(["news", "isLoading"]),
   },
   methods: {
     goURL(url) {
       window.location.href = url;
+    },
+    go_topic(newTopic) {
+      this.$router.push({ path: `/board/topic_news/${newTopic}` });
     },
   },
   
