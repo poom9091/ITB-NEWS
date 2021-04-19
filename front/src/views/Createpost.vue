@@ -1,6 +1,8 @@
 <template>
   <div class=" h-full pt-24 pb-10">
-    <div class=" border-blue-800 border-4 rounded-md  max-w-2xl mx-auto p-6 shadow-2xl">
+    <div
+      class=" border-blue-800 border-4 rounded-md  max-w-2xl mx-auto p-6 shadow-2xl"
+    >
       <div class=" text-3xl font-semibold text-blue-700">Create Post</div>
       <div class="flex flex-col space-y-4 py-2 justify-around">
         <div class=" text-2xl font-semibold">{{ this.title }}</div>
@@ -51,57 +53,57 @@
 
 <script>
 import axios from "axios";
-import {mapGetters} from "vuex"
+import { mapGetters } from "vuex";
 export default {
-  data(){
-    return{
-      user:''
-    }
+  data() {
+    return {
+      user: "",
+    };
   },
-  title: '',
-  img: 'start',
-  des: '',
-  url: '',
-  time: '',
-  ptitle:'',
-  pdes:'',
-  created(){
-    
-    this.title = this.$route.params.title
-    this.img = this.$route.params.img
-    this.des = this.$route.params.des
-    this.url = this.$route.params.url
-    this.time = this.$route.params.time
-    if(this.url==null){
-      this.$router.push('/')
-
+  title: "",
+  img: "start",
+  des: "",
+  url: "",
+  time: "",
+  ptitle: "",
+  pdes: "",
+  created() {
+    this.title = this.$route.params.title;
+    this.img = this.$route.params.img;
+    this.des = this.$route.params.des;
+    this.url = this.$route.params.url;
+    this.time = this.$route.params.time;
+    if (this.url == null) {
+      this.$router.push("/");
     }
-    this.user = this.getUID()
-    
+    this.user = this.getUID();
   },
   mounted() {
     console.log(this.user.uid);
     console.log(this.user.name);
-    if (this.user.uid.length==0){
-      var r = confirm("กรุณา Login ก่อนสร้าง Post")
-      if (r == true) {this.$router.push('/login')}
-      else {this.$router.push('/news')}
+    if (this.user.uid.length == 0) {
+      var r = confirm("กรุณา Login ก่อนสร้าง Post");
+      if (r == true) {
+        this.$router.push("/login");
+      } else {
+        this.$router.push("/news");
+      }
     }
   },
 
-  methods:{
-    ...mapGetters(['getUID']),
-    createpost(){
+  methods: {
+    ...mapGetters(["getUID"]),
+    createpost() {
       const newinfo = {
-        uid:this.getUID().uid,
-        name:this.getUID().name,
-        newtitle : this.title,
-        newimg : this.img,
-        newdes : this.des,
-        newurl : this.url,
-        newtime : this.time,
-        posttitle : this.ptitle,
-        postdes : this.pdes
+        user_id: this.getUID().uid,
+        username: this.getUID().name,
+        newtitle: this.title,
+        newimg: this.img,
+        newdes: this.des,
+        newurl: this.url,
+        newtime: this.time,
+        posttitle: this.ptitle,
+        postdes: this.pdes,
       };
       axios
         .post("http://127.0.0.1:81/createpost", newinfo)

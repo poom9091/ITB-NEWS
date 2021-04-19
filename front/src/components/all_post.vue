@@ -163,7 +163,7 @@ export default {
         };
         p.vote.push(this.user.uid);
         console.log(p);
-        axios.put("http://127.0.0.1:81/createpost", linkcomment).finally(() => {
+        axios.put("http://127.0.0.1:81/allpost", linkcomment).finally(() => {
           this.getPostFromApi();
         });
       }
