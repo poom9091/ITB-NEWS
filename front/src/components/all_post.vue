@@ -15,7 +15,7 @@
 
 <script>
 import { mapState, mapGetters, mapActions } from "vuex";
-import template_post from "../components/template_post"
+import template_post from "../components/template_post";
 
 export default {
   data() {
@@ -23,8 +23,8 @@ export default {
       user: "",
     };
   },
-  components:{
-    template_post
+  components: {
+    template_post,
   },
   computed: {
     ...mapState(["posts", "isLoading_post"]),
