@@ -69,8 +69,10 @@ export default {
       };
       console.log(commentdata);
       axios.post("http://127.0.0.1:81/createcomment", commentdata);
+      this.$forceUpdate();
       // .then((response) => (console.log(response.data)));
     },
+
   },
   created() {
     this.user = this.getUID();

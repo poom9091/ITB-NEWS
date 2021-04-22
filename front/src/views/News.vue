@@ -1,8 +1,9 @@
 <template>
-  <div class="about">
-    
-    <all_new class="w-11/12 m-auto my-24" />
-    
+  <div class="  h-screen">
+    <div class=" h-2/6 bg-blue-600 flex mt-4 shadow-lg ">
+        <div class=" text-3xl  sm:text-5xl text-white font-black m-auto font-sans z-50 ">Recomment News</div>
+    </div>
+    <all_new class="sm:w-10/12 m-auto rounded-md -mt-16 bg-white shadow-2xl z-0 " />
   </div>
 </template>
 

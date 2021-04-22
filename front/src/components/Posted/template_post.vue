@@ -150,6 +150,7 @@
 import axios from "axios";
 export default {
   props: ["p", "user"],
+  
   created() {
     console.log(this.p);
   },
@@ -161,7 +162,7 @@ export default {
       window.location.href = url;
     },
     linkcomment(p) {
-      if (this.user.uid.length == 0) {
+      if (this.user.uid == null) {
         var r = confirm("กรุณา Login ก่อนถึงใช้งาน Feature นี้ได้");
         if (r == true) {
           this.$router.push("/login");

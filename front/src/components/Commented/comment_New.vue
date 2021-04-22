@@ -196,19 +196,24 @@
 
 <script>
 import axios from "axios";
-import { mapGetters } from "vuex";
+import { mapGetters,mapActions } from "vuex";
 export default {
   data() {
     return {
       edit: false,
       detail: null,
       isLoad: false,
+      user: {
+        uid:null,
+        name:null
+      },
     };
   },
   props: ["post_id"],
-  user: {},
+  
 
   methods: {
+    ...mapActions(['getPostFromApi']),
     goURL(url) {
       window.location.href = url;
     },
@@ -219,6 +224,7 @@ export default {
         .finally(() => {
           this.$router.push("/board");
         });
+      await this.getPostFromApi()
     },
     async editPost() {
       // console.log(this.detail);
@@ -233,7 +239,7 @@ export default {
         });
     },
     linkcomment(detail) {
-      if (this.user.uid.length == 0) {
+      if (this.user.uid == null) {
         var r = confirm("กรุณา Login ก่อนถึงใช้งาน Feature นี้ได้");
         if (r == true) {
           this.$router.push("/login");

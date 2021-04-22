@@ -8,9 +8,9 @@
 
 <script>
 
-import comment from "../components/comment_CM";
-import news from "../components/comment_New";
-import createcm from "../components/Create_cm"
+import comment from "../components/Commented/comment_CM";
+import news from "../components/Commented/comment_New";
+import createcm from "../components/Commented/Create_cm"
 export default {
   _id: "",
   components: {

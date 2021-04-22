@@ -1,31 +1,32 @@
 <template>
   <div>
-    <div class="flex bg-blue-500 py-4 text-white justify-between  px-7">
-      <div class=" font-extrabold text-3xl my-auto">
-        <router-link to="/">ITB-NEWS</router-link>
+    <div class="flex bg-blue-600 py-2 text-white justify-between  px-7">
+      <div class=" my-auto space-x-2">
+        <router-link class=" font-extrabold text-2xl"  to="/">ITB-NEWS</router-link>
+        <router-link
+          class="transition duration-300 ease-in-out p-2 px-3 rounded-xl text-lg font-semibold  my-auto
+                        hover:bg-white hover:bg-opacity-20 "
+          to="/"
+        >
+          Home</router-link
+        >
       </div>
-      <div class="flex space-x-4 text-xl font-semibold ">
+      <div class="flex space-x-4 text-lg font-semibold ">
+        
         <router-link
           class="transition duration-300 ease-in-out p-2 px-3 rounded-xl  my-auto
-                        hover:bg-white hover:text-blue-500 hover:text-4xl"
+                        hover:bg-white hover:bg-opacity-20 "
           to="/board"
         >
           Board</router-link
         >
         <router-link
           class="transition duration-300 ease-in-out p-2 px-3 rounded-xl my-auto
-                        hover:bg-white hover:text-blue-500 hover:text-4xl"
+                        hover:bg-white hover:bg-opacity-20 "
           to="/news"
           >News Today</router-link
         >
-        <router-link
-          v-if=" this.user.uid == null"
-          class="transition duration-300 ease-in-out p-2 rounded-xl
-                        bg-white text-blue-500 px-3 border-4 border-blue-600
-                        hover:bg-blue-600 hover:text-white "
-          to="/login"
-          >Login</router-link
-        >
+        
 
         <!-- <router-link
           v-else
@@ -50,9 +51,17 @@
             />
           </svg>
         </router-link> -->
+        <router-link
+          v-if=" this.user.uid == null"
+          class="transition duration-300 ease-in-out p-1 rounded-xl
+                        bg-white text-blue-500 px-3 border-4 border-blue-600
+                        hover:bg-blue-600 hover:text-white "
+          to="/login"
+          >Login</router-link
+        >
         <profile_d v-else />
       </div>
-
+      
     </div>
   </div>
 </template>
@@ -69,7 +78,6 @@ export default {
     ...mapState(["user"]),
   },
   mounted() {
-    console.log(this.user.uid.length);
   },
 };
 </script>

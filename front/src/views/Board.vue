@@ -10,14 +10,20 @@
 <script>
 // import post from '../components/all_post'
 // import post_by_profile from '../components/all_post_profile'
+import { mapActions } from 'vuex'
 export default {
   data() {
     return {
       profile:this.$route.params.name
+      
     }
   },
   mounted() {
+    this.getPostFromApi();
     console.log(this.profile)
+  },
+  methods: {
+    ...mapActions(['getPostFromApi']),
   },
   components:{
     // post,

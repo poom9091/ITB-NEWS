@@ -15,12 +15,15 @@
 
 <script>
 import { mapState, mapGetters, mapActions } from "vuex";
-import template_post from "../components/template_post";
+import template_post from "../Posted/template_post";
 
 export default {
   data() {
     return {
-      user: "",
+      user:{
+        uid:null,
+        name:null
+      },
     };
   },
   components: {

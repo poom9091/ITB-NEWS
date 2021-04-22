@@ -1,18 +1,18 @@
 import axios from "axios";
 import { createStore } from "vuex";
 
-<<<<<<< HEAD
+
 let urlnew="https://newsapi.org/v2/top-headlines?country=us&category=technology&apiKey=380094e98a684b578fa885b235439b36"
 
 // Get all post
 let apipost="https://api.jsonbin.io/b/6072cbe55b165e19f61cbc91/6"
-=======
-let urlnew =
-  "https://newsapi.org/v2/top-headlines?country=us&category=technology&apiKey=380094e98a684b578fa885b235439b36";
 
-// Get all post
-let apipost = "http://127.0.0.1:81/allpost";
->>>>>>> 1eae71399a187b2bd6127d92180ba2215946a154
+// let urlnew =
+//   "https://newsapi.org/v2/top-headlines?country=us&category=technology&apiKey=380094e98a684b578fa885b235439b36";
+
+// // Get all post
+// let apipost = "http://127.0.0.1:81/allpost";
+
 
 export default createStore({
   state: {
