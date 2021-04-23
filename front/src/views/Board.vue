@@ -1,10 +1,15 @@
 <template>
-
-  <div class=" max-w-max w-8/12 mx-auto py-4 my-24  bg-gray-200" >
+  <div class=" h-screen w-screen">
+    <div class=" h-2/6 bg-blue-500 flex mt-8 shadow-lg ">
+        <div class=" text-3xl  sm:text-5xl text-white font-black m-auto font-sans  ">Board</div>
+    </div>
+    <div class="sm:w-9/12 m-auto rounded-md -mt-16 bg-white shadow-2xl z-0">
       <!-- <div class=" text-4xl font-bold text-blue-500">Board</div> -->
-      <router-view class="flex flex-col space-y-2 px-3"/>
+      <router-view class="flex flex-col space-y-2 px-3 py-2"/>
       
   </div>
+  </div>
+  
 </template>
 
 <script>

@@ -1,4 +1,5 @@
 <template>
+  
   <div v-if="!isLoading_post" class="">
     <div
       v-for="p in posts"

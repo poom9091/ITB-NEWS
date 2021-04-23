@@ -1,7 +1,7 @@
 <template>
-  <div class=" mb-8  h-full">
+  <div class=" mb-8 w-full h-full">
     <div id="nav ">
-      <Navbar class="fixed top-0 w-screen z-40" />
+      <Navbar class="fixed top-0 w-full z-40" />
     </div>
     <router-view />
     

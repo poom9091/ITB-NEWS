@@ -1,9 +1,9 @@
 <template>
   <div class="  h-screen">
-    <div class=" h-2/6 bg-blue-600 flex mt-4 shadow-lg ">
-        <div class=" text-3xl  sm:text-5xl text-white font-black m-auto font-sans z-50 ">Recomment News</div>
+    <div class=" h-2/6 bg-blue-500 flex  mt-8 shadow-lg ">
+        <div class=" text-3xl  sm:text-5xl text-white font-black m-auto font-sans  ">Recomment News</div>
     </div>
-    <all_new class="sm:w-10/12 m-auto rounded-md -mt-16 bg-white shadow-2xl z-0 " />
+    <all_new class="px-3 sm:w-10/12 m-auto rounded-md -mt-16 bg-white shadow-2xl z-0 " />
   </div>
 </template>
 

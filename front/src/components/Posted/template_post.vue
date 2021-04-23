@@ -1,6 +1,6 @@
 <template lang="">
   <div>
-    <div class="p-2 px-3 border-b-2  ">
+    <div class="p-2 sm:px-3 border-b-2  ">
       <div
         class=" flex-row flex justify-between  text-sm font-thin text-gray-700"
       >
@@ -12,7 +12,20 @@
         </div>
         <div>{{ p.time }}</div>
       </div>
-      <div class="text-2xl font-bold   ">{{ p.posttitle }}</div>
+      <div class="flex justify-between flex-wrap content-center">
+        <div class="text-2xl font-bold ">{{ p.posttitle }}</div>
+         <div class="flex flex-row space-x-2 text-gray-400 text-sm">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 m-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+              </svg>
+              <div class=" flex space-x-2 m-auto">
+                <div>{{ p.view }}  </div>
+                <div class=" invisible sm:visible w-0 sm:w-max">View</div>
+              </div>
+      </div>
+      </div>
+     
     </div>
     <router-link
       :to="{
@@ -23,21 +36,24 @@
       }"
     >
       <div class="px-4 py-2  border-b-2">
-        <div class=" text-sm font-medium truncate ">{{ p.newtitle }}</div>
-        <div class=" flex space-x-2 mt-2 relative">
-          <img :src="p.newimg" class=" rounded-lg w-60 " />
-          <div class=" italic text-sm text-justify overflow-ellipsis">
+        <div class="flex justify-between">
+          <div class=" text-sm font-medium sm:truncate w-full ">{{ p.newtitle }}</div>
+          
+        </div>
+        <div class=" flex flex-col sm:flex-row space-y-2 sm:space-x-2 mt-2 relative">
+          <img :src="p.newimg" class=" rounded-lg sm:w-60  w-full" />
+          <div class=" italic text-xs sm:text-sm text-justify overflow-ellipsis">
             {{ p.newdes }}
           </div>
         </div>
       </div>
 
-      <div class=" p-3 overflow-ellipsis overflow-auto max-h-24 border-b-2">
+      <div class=" p-3 overflow-ellipsis overflow-auto text-sm sm:text-base max-h-24 border-b-2">
         {{ p.postdes }}
       </div>
     </router-link>
 
-    <div class="flex justify-between px-3 py-2 align-middle">
+    <div class="flex flex-row justify-between px-3 py-2 align-middle">
       <div class="flex divide-x-2 space-x-2">
         <button
           v-if="p.vote.includes(user.uid)"
@@ -57,7 +73,7 @@
             </svg>
           </div>
           <div>{{ p.vote.length }}</div>
-          <div>Vote</div>
+          <div class="invisible sm:visible w-0 sm:w-8  ">Vote</div>
         </button>
 
         <button
@@ -78,8 +94,8 @@
             </svg>
           </div>
           <div></div>
-          <div>{{ p.vote.length }}</div>
-          <div>Vote</div>
+          <div >{{ p.vote.length }}</div>
+          <div class="invisible sm:visible w-0 sm:w-8 ">Vote</div>
         </button>
 
         <div class="flex justify-between max-w-max w-max space-x-2 p-2">
@@ -98,13 +114,14 @@
             </svg>
           </div>
           <div>{{ p.view }}</div>
-          <div>Comments</div>
+          <div class="invisible sm:visible w-0 sm:w-8 ">Comments</div>
         </div>
       </div>
-      <div class="flex w-max max-w-max space-x-2">
+
+      <div class="flex space-x-2">
         <button
           v-on:click="go_topic(p.newtitle)"
-          class="transition duration-200 ease-in-out flex space-x-2 bg-gray-400 p-2 rounded-md hover:bg-blue-400 text-white"
+          class="transition duration-200 ease-in-out flex sm:space-x-2 bg-gray-400 p-2 rounded-md hover:bg-blue-400 text-white h-10"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -121,11 +138,11 @@
               clip-rule="evenodd"
             />
           </svg>
-          <div class=" max-w-max w-max">Topic New</div>
+          <div class="sm:visible sm:max-w-max sm:w-max w-0 invisible ">Topic New</div>
         </button>
         <button
           v-on:click="goURL(p.newurl)"
-          class="transition duration-200 ease-in-out flex space-x-2 bg-gray-400 p-2 rounded-md hover:bg-blue-400 text-white  "
+          class="transition duration-200 ease-in-out flex sm:space-x-2 bg-gray-400 p-2 rounded-md hover:bg-blue-400 text-white  h-10 "
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -140,7 +157,7 @@
               d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"
             />
           </svg>
-          <div class=" max-w-max w-max">Link to news</div>
+          <div class="sm:visible sm:max-w-max sm:w-max w-0 invisible ">Link to news</div>
         </button>
       </div>
     </div>
