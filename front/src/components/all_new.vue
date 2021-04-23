@@ -13,7 +13,7 @@
             {{ n.title }}
           </div>
           <div
-            class=" text-sm sm:text-base text-black text-justify sm:text-right "
+            class=" text-sm sm:text-base text-black text-justify  "
           >
             {{ n.description }}
           </div>

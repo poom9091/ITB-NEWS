@@ -2,7 +2,7 @@
   <div>
     <div class="flex bg-blue-600 py-2 text-white justify-between  px-7">
       <div class=" my-auto space-x-2">
-        <router-link class=" font-extrabold text-2xl"  to="/">ITB-NEWS</router-link>
+        <router-link class=" font-extrabold text-2xl"  to="/">ITB-NEW<h1 class=" inline-block text-red-500">S</h1></router-link>
         <router-link
           class="transition duration-300 ease-in-out p-2 px-3 rounded-xl text-lg font-semibold  my-auto
                         hover:bg-white hover:bg-opacity-20 "

@@ -5,7 +5,7 @@ import { createStore } from "vuex";
 let urlnew="https://newsapi.org/v2/top-headlines?country=us&category=technology&apiKey=380094e98a684b578fa885b235439b36"
 
 // Get all post
-let apipost="https://api.jsonbin.io/b/6072cbe55b165e19f61cbc91/6"
+let apipost="https://api.jsonbin.io/b/6072cbe55b165e19f61cbc91/7"
 
 // let urlnew =
 //   "https://newsapi.org/v2/top-headlines?country=us&category=technology&apiKey=380094e98a684b578fa885b235439b36";
@@ -61,8 +61,32 @@ export default createStore({
       console.log(state.user.uid);
       console.log(state.user.name);
     },
+    set_sort_post_view(state){
+      state.posts.sort(function(a,b){
+        return b.view - a.view
+      })
+    },
+    set_sort_post_vote(state){
+      state.posts.sort(function(a,b){
+        return b.view.length - a.view.length
+      })
+    },
+    set_sort_post_comment(state){
+      state.posts.sort(function(a,b){
+        return b.comment.length - a.comment.length
+      })
+    },
   },
   actions: {
+    Sort_View({ commit }){
+      commit("set_sort_post_view")
+    },
+    Sort_Vote({ commit }){
+      commit("set_sort_post_vote")
+    },
+    Sort_Comment({ commit }){
+      commit("set_sort_post_comment")
+    },
     async setUser({ commit }, user) {
       // console.log(user.uid);
       // console.log(user.name);
@@ -104,6 +128,8 @@ export default createStore({
     //     commit("setLoadPost", false);
     //   });
     },
+ 
+    
   },
 
   modules: {},

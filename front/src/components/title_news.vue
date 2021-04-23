@@ -1,5 +1,5 @@
 <template lang="">
-  <div class="px-2 lg:px-20 py-5 lg:py-10 lg:pt-20 ">
+  <div class="px-2 lg:px-20 py-5  lg:pt-20 ">
     <div
       class=" text-4xl  text-blue-600 font-extrabold px-4 pb-5 border-b-4 border-dashed border-blue-400 "
     >
@@ -18,7 +18,7 @@
                 n.urlToImage +
                 ')',
             }"
-            class=" h-72 bg-cover bg-center  bg-no-repeat flex justify-end flex-col p-2 py-5 relative rounded-xl shadow-xl"
+            class="  h-72 bg-cover bg-center  bg-no-repeat flex justify-end flex-col p-2 py-5 relative rounded-xl shadow-xl"
           >
             <div class=" text-white font-bold  text-base  lg:font-black lg:text-2xl ">
               {{ n.title }}
@@ -182,7 +182,7 @@
         </div>
         
       </div>
-      <button  class=" absolute -bottom-7 right-2 underline italic text-blue-500 " @click="loadMore+=6" >Load More ...</button>
+      <button  class=" absolute -bottom-10 right-2 underline italic text-blue-500 " @click="loadMore+=6" >Load More ...</button>
     </div>
     <div v-else>
       <div class=" text-center text-blue-500 py-11 font-extrabold">

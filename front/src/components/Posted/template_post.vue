@@ -1,6 +1,6 @@
 <template lang="">
-  <div>
-    <div class="p-2 sm:px-3 border-b-2  ">
+  <div class="shadow-xl">
+    <div class="p-2 sm:px-3 border-b-2 ">
       <div
         class=" flex-row flex justify-between  text-sm font-thin text-gray-700"
       >
@@ -113,7 +113,7 @@
               />
             </svg>
           </div>
-          <div>{{ p.view }}</div>
+          <div>{{ p.comment.length }}</div>
           <div class="invisible sm:visible w-0 sm:w-8 ">Comments</div>
         </div>
       </div>
