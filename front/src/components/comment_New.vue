@@ -215,7 +215,7 @@ export default {
     async deletePost(comment) {
       console.log(comment);
       await axios
-        .delete("http://127.0.0.1:81/delpost/" + this.post_id)
+        .delete("http://127.0.0.1:5000/delpost/" + this.post_id)
         .finally(() => {
           this.$router.push("/board");
         });
@@ -226,7 +226,7 @@ export default {
       this.edit = false;
       this.$forceUpdate();
       await axios
-        .put("http://127.0.0.1:81/editpost/" + this.post_id, this.detail)
+        .put("http://127.0.0.1:5000/editpost/" + this.post_id, this.detail)
         .finally(() => {
           this.getNew();
           console.log(this.detail);
@@ -245,9 +245,11 @@ export default {
         };
         detail.vote.push(this.user.uid);
         console.log(detail);
-        axios.put("http://127.0.0.1:81/createpost", linkcomment).finally(() => {
-          this.getNew();
-        });
+        axios
+          .put("http://127.0.0.1:5000/createpost", linkcomment)
+          .finally(() => {
+            this.getNew();
+          });
       }
     },
     dislinkcomment(detail) {
@@ -261,7 +263,7 @@ export default {
       }
       // p.vote.pop(this.user.uid);
       console.log(detail);
-      axios.put("http://127.0.0.1:81/createpost", linkcomment).finally(() => {
+      axios.put("http://127.0.0.1:5000/createpost", linkcomment).finally(() => {
         this.getNew();
       });
     },
@@ -269,7 +271,7 @@ export default {
       let post_id1 = { _id: this.post_id };
       await console.log(post_id1);
       await axios
-        .get("http://127.0.0.1:81/gpost/" + this.post_id)
+        .get("http://127.0.0.1:5000/gpost/" + this.post_id)
         .then((response) => {
           this.detail = response.data;
           console.log(this.detail);

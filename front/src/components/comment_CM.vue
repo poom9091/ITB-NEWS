@@ -97,7 +97,7 @@ export default {
     },
     async delComment(id) {
       await axios
-        .delete("http://127.0.0.1:81/delcomment/" + id._id, id)
+        .delete("http://127.0.0.1:5000/delcomment/" + id._id, id)
         .finally(() => {
           this.getAllComment();
           // console.log(this.comments);
@@ -107,15 +107,17 @@ export default {
       console.log(id);
       this.edit = false;
       this.comment_id_edit = null;
-      axios.put("http://127.0.0.1:81/editcomment/" + id._id, id).finally(() => {
-        this.getAllComment();
-        console.log(this.comments);
-      });
+      axios
+        .put("http://127.0.0.1:5000/editcomment/" + id._id, id)
+        .finally(() => {
+          this.getAllComment();
+          console.log(this.comments);
+        });
     },
 
     async getAllComment() {
       await axios
-        .get("http://127.0.0.1:81/comment/" + this.post_id)
+        .get("http://127.0.0.1:5000/comment/" + this.post_id)
         .then((response) => {
           this.comments = response.data;
           console.log(this.comments);

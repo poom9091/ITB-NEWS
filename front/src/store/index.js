@@ -5,7 +5,7 @@ let urlnew =
   "https://newsapi.org/v2/top-headlines?country=us&category=technology&apiKey=380094e98a684b578fa885b235439b36";
 
 // Get all post
-let apipost = "http://127.0.0.1:81/allpost";
+let apipost = "http://127.0.0.1:5000/allpost";
 
 export default createStore({
   state: {
