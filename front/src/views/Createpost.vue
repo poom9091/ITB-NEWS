@@ -62,13 +62,13 @@
 
 <script>
 import axios from "axios";
-import { mapGetters,mapActions } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 export default {
   data() {
     return {
-      user:{
-        uid:null,
-        name:null
+      user: {
+        uid: null,
+        name: null,
       },
       ptitle: "",
     };
@@ -105,11 +105,9 @@ export default {
   },
 
   methods: {
-    ...mapActions(['getPostFromApi']),
+    ...mapActions(["getPostFromApi"]),
     ...mapGetters(["getUID"]),
-     go_profile(){  
-     
-    },
+    go_profile() {},
     async createpost() {
       const newinfo = {
         user_id: this.getUID().uid,
@@ -122,13 +120,15 @@ export default {
         posttitle: this.ptitle,
         postdes: this.pdes,
       };
-      // api crate post
       await axios
-        .post("http://127.0.0.1:81/createpost", newinfo)
+        .post("http://127.0.0.1:5000/createpost", newinfo)
+
         .then((response) => (this.newinfo = response.data));
       console.log(newinfo);
       await this.getPostFromApi();
-      await this.$router.push(({ path: `/board/profile/${this.getUID().uid}/${this.getUID().name}` }))
+      await this.$router.push({
+        path: `/board/profile/${this.getUID().uid}/${this.getUID().name}`,
+      });
       // await this.$router.push({ path: '/board' })
     },
   },

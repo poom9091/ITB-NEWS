@@ -84,8 +84,8 @@ export default {
       comment_id_edit: "",
       comments: [],
       user: {
-        uid:'',
-        name:''
+        uid: "",
+        name: "",
       },
     };
   },
@@ -99,39 +99,29 @@ export default {
       this.comment_id_edit = id;
     },
     async delComment(id) {
-
       await axios
-        .delete("http://127.0.0.1:81/delcomment/" + id._id, id)
+        .delete("http://127.0.0.1:5000/delcomment/" + id._id, id)
         .finally(() => {
           this.getAllComment();
           // console.log(this.comments);
         });
-
     },
     editComment(id) {
       console.log(id);
       this.edit = false;
       this.comment_id_edit = null;
 
-      //api comment
-        axios.put("http://127.0.0.1:81/editcomment/" + id._id, id).finally(() => {
-        this.getAllComment();
-        console.log(this.comments);
-      });
+      axios
+        .put("http://127.0.0.1:5000/editcomment/" + id._id, id)
+        .finally(() => {
+          this.getAllComment();
+          console.log(this.comments);
+        });
     },
 
     async getAllComment() {
       await axios
-
-        //api comment
-        .get("https://api.jsonbin.io/b/607842b55b165e19f620b00b/2", {
-          headers: {
-            "secret-key":
-              "$2b$10$pJX92cjXZes3hSYfvlbp5e1xRhcBEEUNb3iGF8AAaXms5LFcB6mu2",
-          },
-        })
-
-        // .get("http://127.0.0.1:81/comment/" + this.post_id)
+        .get("http://127.0.0.1:5000/comment/" + this.post_id)
 
         .then((response) => {
           this.comments = response.data;

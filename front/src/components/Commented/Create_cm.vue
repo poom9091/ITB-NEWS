@@ -68,11 +68,13 @@ export default {
         time: THtime,
       };
       console.log(commentdata);
-      axios.post("http://127.0.0.1:81/createcomment", commentdata);
+
+      axios.post("http://127.0.0.1:5000/createcomment", commentdata);
+      this.$router.go(this.$router.currentRoute);
       this.$forceUpdate();
+
       // .then((response) => (console.log(response.data)));
     },
-
   },
   created() {
     this.user = this.getUID();
