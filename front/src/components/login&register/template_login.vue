@@ -36,9 +36,9 @@
         </button>
 </template>
 <script>
-import Login_facebook from "../components/login_facebook";
-import Login_Google from "../components/login_google";
-import Login from "../components/login";
+import Login_facebook from "../login&register/login_facebook.vue";
+import Login_Google from "../login&register/login_google.vue";
+import Login from "../login&register/login";
 export default {
     components: {
     Login_facebook,

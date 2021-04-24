@@ -15,11 +15,11 @@ const routes = [
     children:[
       {
         path:'',
-        component: () => import('../components/template_login.vue')
+        component: () => import('../components/login&register/template_login')
       },
       {
         path:'register',
-        component: () => import('../components/register.vue')
+        component: () => import('../components/login&register/register.vue')
       },
     ]
   },
@@ -31,17 +31,17 @@ const routes = [
       {
         name:'Board_profile',
         path:'profile/:uid/:name',
-        component: () => import(/* webpackChunkName: "about" */ '../components/all_post_profile'),
+        component: () => import(/* webpackChunkName: "about" */ '../components/Posted/all_post_profile'),
         props:true
       },
       {
         path:'topic_news/:topic',
-        component: () => import(/* webpackChunkName: "about" */ '../components/all_post_topic'),
+        component: () => import(/* webpackChunkName: "about" */ '../components/Posted/all_post_topic'),
         props:true
       },
       {
         path:'',
-        component: () => import('../components/all_post')
+        component: () => import('../components/Posted/all_post')
       },
     ]
   },

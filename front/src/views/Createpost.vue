@@ -62,11 +62,14 @@
 
 <script>
 import axios from "axios";
-import { mapGetters } from "vuex";
+import { mapGetters,mapActions } from "vuex";
 export default {
   data() {
     return {
-      user: "",
+      user:{
+        uid:null,
+        name:null
+      },
       ptitle: "",
     };
   },
@@ -91,7 +94,7 @@ export default {
   mounted() {
     console.log(this.user.uid);
     console.log(this.user.name);
-    if (this.user.uid.length == 0) {
+    if (this.user.uid == null) {
       var r = confirm("กรุณา Login ก่อนสร้าง Post");
       if (r == true) {
         this.$router.push("/login");
@@ -102,8 +105,12 @@ export default {
   },
 
   methods: {
+    ...mapActions(['getPostFromApi']),
     ...mapGetters(["getUID"]),
-    createpost() {
+     go_profile(){  
+     
+    },
+    async createpost() {
       const newinfo = {
         user_id: this.getUID().uid,
         username: this.getUID().name,
@@ -115,10 +122,14 @@ export default {
         posttitle: this.ptitle,
         postdes: this.pdes,
       };
-      axios
+      // api crate post
+      await axios
         .post("http://127.0.0.1:81/createpost", newinfo)
         .then((response) => (this.newinfo = response.data));
       console.log(newinfo);
+      await this.getPostFromApi();
+      await this.$router.push(({ path: `/board/profile/${this.getUID().uid}/${this.getUID().name}` }))
+      // await this.$router.push({ path: '/board' })
     },
   },
 };

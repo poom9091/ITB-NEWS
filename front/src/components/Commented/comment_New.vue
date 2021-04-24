@@ -10,7 +10,7 @@
         }"
         class=" h-72 bg-cover bg-top flex justify-end flex-col p-2 py-5 relative"
       >
-        <div class=" text-white font-black text-2xl ">
+        <div class=" text-white font-black text-lg sm:text-2xl ">
           {{ detail.newtitle }}
         </div>
         <div
@@ -84,12 +84,12 @@
         </div>
       </div>
 
-      <div v-if="!edit" class="flex justify-between space-x-2 px-4 py-3   ">
-        <div class="flex divide-x-2 space-x-3 divide-gray-500">
+      <div v-if="!edit" class="flex flex-wrap flex-col-reverse  md:flex-row  justify-between  md:px-4 md:py-3 ">
+        <div class=" flex divide-x  w-full md:max-w-max  justify-center   items-center space-x-2 sm:space-x-3 divide-gray-500">
           <button
             v-if="detail.vote.includes(user.uid)"
             v-on:click="dislinkcomment(detail)"
-            class="flex justify-between space-x-3 hover:bg-gray-300 max-w-max w-max p-2 rounded-md "
+            class="flex justify-between items-center space-x-2 hover:bg-gray-300 max-w-max w-max   rounded-md  p-2"
           >
             <div>
               <svg
@@ -103,14 +103,14 @@
                 />
               </svg>
             </div>
-            <div>{{ detail.vote.length }}</div>
-            <div>Vote</div>
+            <div  class="text-xs sm:text-base">{{ detail.vote.length }}</div>
+            <div class=" text-xs sm:text-base">Vote</div>
           </button>
 
           <button
             v-else
             v-on:click="linkcomment(detail)"
-            class="flex justify-between space-x-2 hover:bg-gray-300 max-w-max w-max p-2 rounded-md "
+            class="flex justify-between items-center space-x-2 hover:bg-gray-300 max-w-max w-max  p-2 rounded-md "
           >
             <div>
               <svg
@@ -124,12 +124,11 @@
                 />
               </svg>
             </div>
-            <div></div>
-            <div>{{ detail.vote.length }}</div>
-            <div>Vote</div>
+            <div class=" text-xs sm:text-base">{{ detail.vote.length }}</div>
+            <div class=" text-xs sm:text-base">Vote</div>
           </button>
 
-          <div class="flex space-x-3 max-w-max w-max p-2 ">
+          <div class="flex space-x-2 items-center max-w-max w-max py-2 p-2 ">
             <div>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -144,19 +143,47 @@
                 />
               </svg>
             </div>
-            <div>{{ detail.view }}</div>
-            <div>Comments</div>
+            <div class="text-xs sm:text-base">{{ detail.comment.length }}</div>
+            <div class="text-xs sm:text-base">Comments</div>
           </div>
+
+          <div class="flex space-x-2 items-center max-w-max w-max p-2 ">
+            <div>
+              <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-5 w-5 text-gray-400 m-auto"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+            />
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+            />
+          </svg>
+            </div>
+            <div class="text-xs sm:text-base">{{ detail.view }}</div>
+            <div class="text-xs sm:text-base">View</div>
+          </div>
+
         </div>
-        <div v-if="detail.user_id === user.uid">
-          <div class="flex space-x-3 px-2 ">
+        <div v-if="detail.user_id === user.uid" class="w-full md:max-w-max ">
+          <div class="flex justify-end items-center space-x-3  p-2 h-full border-b-2 md:border-b-0    ">
             <button
               class="text-gray-400 hover:text-gray-800 flex space-x-1"
               v-on:click="this.edit = true"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                class="h-5 w-5"
+                class="h-5 w-5 "
                 viewBox="0 0 20 20"
                 fill="currentColor"
               >
@@ -196,19 +223,24 @@
 
 <script>
 import axios from "axios";
-import { mapGetters } from "vuex";
+import { mapGetters,mapActions } from "vuex";
 export default {
   data() {
     return {
       edit: false,
       detail: null,
       isLoad: false,
+      user: {
+        uid:null,
+        name:null
+      },
     };
   },
   props: ["post_id"],
-  user: {},
+  
 
   methods: {
+    ...mapActions(['getPostFromApi']),
     goURL(url) {
       window.location.href = url;
     },
@@ -219,6 +251,7 @@ export default {
         .finally(() => {
           this.$router.push("/board");
         });
+      await this.getPostFromApi()
     },
     async editPost() {
       // console.log(this.detail);
@@ -233,7 +266,7 @@ export default {
         });
     },
     linkcomment(detail) {
-      if (this.user.uid.length == 0) {
+      if (this.user.uid == null) {
         var r = confirm("กรุณา Login ก่อนถึงใช้งาน Feature นี้ได้");
         if (r == true) {
           this.$router.push("/login");
@@ -245,6 +278,7 @@ export default {
         };
         detail.vote.push(this.user.uid);
         console.log(detail);
+        // comment api
         axios.put("http://127.0.0.1:81/createpost", linkcomment).finally(() => {
           this.getNew();
         });
@@ -265,11 +299,18 @@ export default {
         this.getNew();
       });
     },
+
     async getNew() {
       let post_id1 = { _id: this.post_id };
       await console.log(post_id1);
       await axios
-        .get("http://127.0.0.1:81/gpost/" + this.post_id)
+        // .get("http://127.0.0.1:81/gpost/" + this.post_id)
+        .get("https://api.jsonbin.io/b/6076d93d0ed6f819beac0f9f/4", {
+          headers: {
+            "secret-key":
+              "$2b$10$pJX92cjXZes3hSYfvlbp5e1xRhcBEEUNb3iGF8AAaXms5LFcB6mu2",
+          },
+        })
         .then((response) => {
           this.detail = response.data;
           console.log(this.detail);
@@ -279,8 +320,10 @@ export default {
         .catch((error) => console.log(error));
     },
     ...mapGetters(["getUID"]),
+
   },
   created() {
+    console.log(this.post_id)
     this.user = this.getUID();
     this.getNew();
   },
