@@ -330,6 +330,9 @@ def delete_comm(id):
 #     x = post.update_one(gpost, vote)
 #     return jsonify({"status": "vote Success"})
 
+@app.route('/')
+def hello():
+    return "Hello IT"
 
 if __name__ == "__main__":
     # app.run(host="127.0.0.1", port=81)
