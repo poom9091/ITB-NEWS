@@ -1,5 +1,8 @@
 <template>
-  <div v-if="!isLoading_post" class="">
+  
+  <div v-if="!isLoading_post" class="  ">
+  
+    
     <div
       v-for="p in posts"
       :key="p.index"
@@ -14,17 +17,22 @@
 </template>
 
 <script>
-import { mapState, mapGetters, mapActions } from "vuex";
-import template_post from "../components/template_post";
 
+import { mapState, mapGetters, mapActions } from "vuex";
+import template_post from "../Posted/template_post";
+// import sort_post from "../sort_post"
 export default {
   data() {
     return {
-      user: "",
+      user:{
+        uid:null,
+        name:null
+      },
     };
   },
   components: {
     template_post,
+    // sort_post
   },
   computed: {
     ...mapState(["posts", "isLoading_post"]),

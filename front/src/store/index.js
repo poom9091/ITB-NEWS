@@ -5,6 +5,7 @@ let urlnew =
   "https://newsapi.org/v2/top-headlines?country=us&category=technology&apiKey=380094e98a684b578fa885b235439b36";
 
 // Get all post
+
 let apipost = "http://127.0.0.1:5000/allpost";
 
 export default createStore({
@@ -54,8 +55,32 @@ export default createStore({
       console.log(state.user.uid);
       console.log(state.user.name);
     },
+    set_sort_post_view(state) {
+      state.posts.sort(function(a, b) {
+        return b.view - a.view;
+      });
+    },
+    set_sort_post_vote(state) {
+      state.posts.sort(function(a, b) {
+        return b.view.length - a.view.length;
+      });
+    },
+    set_sort_post_comment(state) {
+      state.posts.sort(function(a, b) {
+        return b.comment.length - a.comment.length;
+      });
+    },
   },
   actions: {
+    Sort_View({ commit }) {
+      commit("set_sort_post_view");
+    },
+    Sort_Vote({ commit }) {
+      commit("set_sort_post_vote");
+    },
+    Sort_Comment({ commit }) {
+      commit("set_sort_post_comment");
+    },
     async setUser({ commit }, user) {
       // console.log(user.uid);
       // console.log(user.name);
@@ -64,6 +89,7 @@ export default createStore({
     Logout({ commit }) {
       commit("setUserOut");
     },
+
     async getNewsFromApi({ commit }) {
       let n = [];
       await axios.get(urlnew).then((response) => {
@@ -76,10 +102,27 @@ export default createStore({
 
     // ใช้
     async getPostFromApi({ commit }) {
-      await axios.get(apipost).then((response) => {
-        commit("setPost", response.data);
-        commit("setLoadPost", false);
-      });
+      // ของ เว็บ
+      await axios
+        .get(apipost, {
+          headers: {
+            "secret-key":
+              "$2b$10$pJX92cjXZes3hSYfvlbp5e1xRhcBEEUNb3iGF8AAaXms5LFcB6mu2",
+          },
+        })
+        // ของเราเอง
+        // await axios.get(apipost)
+        .then((response) => {
+          commit("setPost", response.data);
+          commit("setLoadPost", false);
+        });
+
+      // // ใช้
+      // async getPostFromApi({ commit }) {
+      //   await axios.get(apipost).then((response) => {
+      //     commit("setPost", response.data);
+      //     commit("setLoadPost", false);
+      //   });
     },
   },
 

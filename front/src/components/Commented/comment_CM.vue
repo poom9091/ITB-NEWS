@@ -83,14 +83,17 @@ export default {
       edit: false,
       comment_id_edit: "",
       comments: [],
+      user: {
+        uid: "",
+        name: "",
+      },
     };
   },
   props: ["post_id"],
   isLoad: false,
-  user: {},
-
   methods: {
     ...mapGetters(["getUID"]),
+
     geteditComment(id) {
       this.edit = true;
       this.comment_id_edit = id;
@@ -107,6 +110,7 @@ export default {
       console.log(id);
       this.edit = false;
       this.comment_id_edit = null;
+
       axios
         .put("http://127.0.0.1:5000/editcomment/" + id._id, id)
         .finally(() => {
@@ -118,6 +122,7 @@ export default {
     async getAllComment() {
       await axios
         .get("http://127.0.0.1:5000/comment/" + this.post_id)
+
         .then((response) => {
           this.comments = response.data;
           console.log(this.comments);

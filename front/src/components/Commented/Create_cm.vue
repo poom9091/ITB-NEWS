@@ -68,7 +68,11 @@ export default {
         time: THtime,
       };
       console.log(commentdata);
+
       axios.post("http://127.0.0.1:5000/createcomment", commentdata);
+
+      this.$forceUpdate();
+
       // .then((response) => (console.log(response.data)));
     },
   },
