@@ -10,7 +10,11 @@
       News Today
     </div> -->
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 py-3 ">
-        <div v-for="n in news.slice(0, 1)" :key="n.index" class=" col-span-1 lg:col-span-2 ">
+        <div
+          v-for="n in news.slice(0, 1)"
+          :key="n.index"
+          class=" col-span-1 lg:col-span-2 "
+        >
           <div
             :style="{
               backgroundImage:
@@ -20,7 +24,9 @@
             }"
             class="  h-72 bg-cover bg-center  bg-no-repeat flex justify-end flex-col p-2 py-5 relative rounded-xl shadow-xl"
           >
-            <div class=" text-white font-bold  text-base  lg:font-black lg:text-2xl ">
+            <div
+              class=" text-white font-bold  text-base  lg:font-black lg:text-2xl "
+            >
               {{ n.title }}
             </div>
             <div
@@ -29,7 +35,9 @@
               {{ n.description }}
             </div>
 
-            <div class=" lg:absolute lg:bottom-2 lg:right-5 justify-around flex flex-row-reverse ">
+            <div
+              class=" lg:absolute lg:bottom-2 lg:right-5 justify-around  flex flex-row-reverse space-x-reverse space-x-4 "
+            >
               <button
                 v-on:click="goURL(n.url)"
                 class="hover:bg-white p-1 rounded-lg text-white hover:text-black flex flex-col"
@@ -48,7 +56,7 @@
                     d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
                   />
                 </svg>
-                <div class=" text-xs">Read more</div>
+                <div class=" text-xs">More</div>
               </button>
 
               <button
@@ -62,12 +70,15 @@
                   fill="currentColor"
                 >
                   <path
+                    d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2h-1.528A6 6 0 004 9.528V4z"
+                  />
+                  <path
                     fill-rule="evenodd"
-                    d="M5 3a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2V5a2 2 0 00-2-2H5zm0 2h10v7h-2l-1 2H8l-1-2H5V5z"
+                    d="M8 10a4 4 0 00-3.446 6.032l-1.261 1.26a1 1 0 101.414 1.415l1.261-1.261A4 4 0 108 10zm-2 4a2 2 0 114 0 2 2 0 01-4 0z"
                     clip-rule="evenodd"
                   />
                 </svg>
-                <div class=" text-xs">All New's Board</div>
+                <div class=" text-xs">Mention</div>
               </button>
 
               <button
@@ -89,14 +100,14 @@
                     clip-rule="evenodd"
                   />
                 </svg>
-                <div class=" text-xs">Create Post</div>
+                <div class=" text-xs">New Post</div>
               </button>
             </div>
           </div>
         </div>
 
         <div
-          v-for="n in news.slice(1,loadMore)"
+          v-for="n in news.slice(1, loadMore)"
           :key="n.index"
           class="h-72 bg-white rounded-xl"
         >
@@ -133,7 +144,7 @@
                       d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
                     />
                   </svg>
-                  <div class=" text-xs">Read more</div>
+                  <div class=" text-xs">More</div>
                 </button>
 
                 <button
@@ -147,12 +158,15 @@
                     fill="currentColor"
                   >
                     <path
+                      d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2h-1.528A6 6 0 004 9.528V4z"
+                    />
+                    <path
                       fill-rule="evenodd"
-                      d="M5 3a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2V5a2 2 0 00-2-2H5zm0 2h10v7h-2l-1 2H8l-1-2H5V5z"
+                      d="M8 10a4 4 0 00-3.446 6.032l-1.261 1.26a1 1 0 101.414 1.415l1.261-1.261A4 4 0 108 10zm-2 4a2 2 0 114 0 2 2 0 01-4 0z"
                       clip-rule="evenodd"
                     />
                   </svg>
-                  <div class=" text-xs">All New's Board</div>
+                  <div class=" text-xs">Mention</div>
                 </button>
 
                 <button
@@ -174,15 +188,19 @@
                       clip-rule="evenodd"
                     />
                   </svg>
-                  <div class=" text-xs">Create Post</div>
+                  <div class=" text-xs">New Post</div>
                 </button>
               </div>
             </div>
           </div>
         </div>
-        
       </div>
-      <button  class=" absolute -bottom-10 right-2 underline italic text-blue-500 " @click="loadMore+=6" >Load More ...</button>
+      <button
+        class=" absolute -bottom-10 right-2 underline italic text-blue-500 "
+        @click="loadMore += 6"
+      >
+        Load More ...
+      </button>
     </div>
     <div v-else>
       <div class=" text-center text-blue-500 py-11 font-extrabold">
