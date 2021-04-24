@@ -5,22 +5,22 @@
         :style="{
           backgroundImage:
             ' linear-gradient(to bottom, rgba(230, 243, 255,0.2),rgba(1, 1, 1, 0.6), rgba(1, 1, 1, 1)),url(' +
-            detail.newimg +
+            detail[0].newimg +
             ')',
         }"
         class=" h-72 bg-cover bg-top flex justify-end flex-col p-2 py-5 relative"
       >
         <div class=" text-white font-black text-lg sm:text-2xl ">
-          {{ detail.newtitle }}
+          {{ detail[0].newtitle }}
         </div>
         <div
           class=" italic text-sm text-justify overflow-ellipsis  text-white truncate pr-20"
         >
-          {{ detail.newdes }}
+          {{ detail[0].newdes }}
         </div>
 
         <button
-          v-on:click="goURL(detail.newurl)"
+          v-on:click="goURL(detail[0].newurl)"
           class=" absolute bottom-2 right-5 hover:bg-white p-1 rounded-lg text-white hover:text-black flex"
         >
           <svg
@@ -44,26 +44,26 @@
         <div
           class=" flex-row flex justify-between text-sm font-thin text-gray-500 "
         >
-          <div>Posted by {{ detail.username }}</div>
-          <div>{{ detail.time }}</div>
+          <div>Posted by {{ detail[0].username }}</div>
+          <div>{{ detail[0].time }}</div>
         </div>
         <div v-if="!edit">
-          <div class="text-4xl font-bold   ">{{ detail.posttitle }}</div>
+          <div class="text-4xl font-bold   ">{{ detail[0].posttitle }}</div>
           <div class=" py-2 ">
-            {{ detail.postdes }}
+            {{ detail[0].postdes }}
           </div>
         </div>
 
         <div v-else>
           <textarea
             class="text-4xl font-bold border-gray-400 border-2 rounded-md border-dashed px-2 py-1 w-full "
-            v-model="detail.posttitle"
+            v-model="detail[0].posttitle"
             rows="2"
           >
           </textarea>
           <textarea
             class=" py-2 px-2 w-full mt-2 border-2 rounded-md border-dashed border-gray-400   "
-            v-model="detail.postdes"
+            v-model="detail[0].postdes"
             rows="4"
           >
           </textarea>
@@ -92,8 +92,8 @@
           class=" flex divide-x  w-full md:max-w-max  justify-center   items-center space-x-2 sm:space-x-3 divide-gray-500"
         >
           <button
-            v-if="detail.vote.includes(user.uid)"
-            v-on:click="dislinkcomment(detail)"
+            v-if="detail[0].vote.includes(user.uid)"
+            v-on:click="dislinkcomment(detail[0])"
             class="flex justify-between items-center space-x-2 hover:bg-gray-300 max-w-max w-max   rounded-md  p-2"
           >
             <div>
@@ -108,13 +108,13 @@
                 />
               </svg>
             </div>
-            <div class="text-xs sm:text-base">{{ detail.vote.length }}</div>
+            <div class="text-xs sm:text-base">{{ detail[0].vote.length }}</div>
             <div class=" text-xs sm:text-base">Vote</div>
           </button>
 
           <button
             v-else
-            v-on:click="linkcomment(detail)"
+            v-on:click="linkcomment(detail[0])"
             class="flex justify-between items-center space-x-2 hover:bg-gray-300 max-w-max w-max  p-2 rounded-md "
           >
             <div>
@@ -129,7 +129,7 @@
                 />
               </svg>
             </div>
-            <div class=" text-xs sm:text-base">{{ detail.vote.length }}</div>
+            <div class=" text-xs sm:text-base">{{ detail[0].vote.length }}</div>
             <div class=" text-xs sm:text-base">Vote</div>
           </button>
 
@@ -148,7 +148,9 @@
                 />
               </svg>
             </div>
-            <div class="text-xs sm:text-base">{{ detail.comment.length }}</div>
+            <div class="text-xs sm:text-base">
+              {{ detail[0].comment.length }}
+            </div>
             <div class="text-xs sm:text-base">Comments</div>
           </div>
 
@@ -175,11 +177,11 @@
                 />
               </svg>
             </div>
-            <div class="text-xs sm:text-base">{{ detail.view }}</div>
+            <div class="text-xs sm:text-base">{{ detail[0].view }}</div>
             <div class="text-xs sm:text-base">View</div>
           </div>
         </div>
-        <div v-if="detail.user_id === user.uid" class="w-full md:max-w-max ">
+        <div v-if="detail[0].user_id === user.uid" class="w-full md:max-w-max ">
           <div
             class="flex justify-end items-center space-x-3  p-2 h-full border-b-2 md:border-b-0    "
           >
@@ -201,7 +203,7 @@
             </button>
             <button
               class="text-gray-400 hover:text-gray-800 flex space-x-1"
-              v-on:click="deletePost(detail)"
+              v-on:click="deletePost(detail[0])"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -264,10 +266,10 @@ export default {
       this.edit = false;
       this.$forceUpdate();
       await axios
-        .put("http://127.0.0.1:5000/editpost/" + this.post_id, this.detail)
+        .put("http://127.0.0.1:5000/editpost/" + this.post_id, this.detail[0])
         .finally(() => {
           this.getNew();
-          console.log(this.detail);
+          console.log(this.detail[0]);
         });
     },
     linkcomment(detail) {

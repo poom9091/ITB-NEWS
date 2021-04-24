@@ -192,6 +192,7 @@
 </template>
 <script>
 import axios from "axios";
+import { mapActions } from "vuex";
 export default {
   props: ["p", "user"],
 
@@ -199,6 +200,7 @@ export default {
     console.log(this.p);
   },
   methods: {
+    ...mapActions(["getPostFromApi"]),
     go_profile(uid, name) {
       this.$router.push({ path: `/board/profile/${uid}/${name}` });
     },
@@ -214,23 +216,23 @@ export default {
           this.$router.push("/board");
         }
       } else {
-        let linkcomment = {
-          _id: p._id,
-          uid: this.user.uid,
-        };
+        // let linkcomment = {
+        //   _id: p._id,
+        //   uid: this.user.uid,
+        // };
         p.vote.push(this.user.uid);
         console.log(p);
         // api comment
-        axios.put("http://127.0.0.1:81/createpost", linkcomment).finally(() => {
+        axios.put("http://127.0.0.1:5000/editpost/" + p._id, p).finally(() => {
           this.getPostFromApi();
         });
       }
     },
     dislinkcomment(p) {
-      let linkcomment = {
-        _id: p._id,
-        uid: this.user.uid,
-      };
+      // let linkcomment = {
+      //   _id: p._id,
+      //   uid: this.user.uid,
+      // };
       var index = p.vote.indexOf(this.user.uid);
       if (index > -1) {
         p.vote.splice(index, 1);
@@ -238,7 +240,7 @@ export default {
       // p.vote.pop(this.user.uid);
       console.log(p);
       // api comment
-      axios.put("http://127.0.0.1:81/createpost", linkcomment).finally(() => {
+      axios.put("http://127.0.0.1:5000/editpost/" + p._id, p).finally(() => {
         this.getPostFromApi();
       });
     },
