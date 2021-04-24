@@ -1,16 +1,16 @@
 <template lang="">
-     <div class="relative ">
+     <div class="relative text-xs sm:text-base">
         <button v-on:click="isOpen=!isOpen" class="focus:outline-none  block transition duration-300 ease-in-out p-2  rounded-xl 
-                        bg-white text-blue-500 border-2 border-blue-600
+                        bg-white text-blue-500 border-2 border-blue-600 shadow-lg 
                         hover:bg-blue-600 hover:text-white " >
            {{ sort_msg }}
         </button>
         <button v-if="isOpen" @click="isOpen=false" class="fixed top-0 right-0 bottom-0 left-0 h-full w-full " ></button>
         <div v-if="isOpen" class=" absolute  right-0  mt-3 py-3  w-44 bg-white rounded-md shadow-xl space-y-2 border-2 border-blue-900 z-50">
-            <a href=#null @click="Sort_time()" class="block text-gray-900 text-base hover:bg-blue-600 px-4 py-2 hover:text-white">Sort by Time</a>
-            <a href=#null @click="Sort_view()" class="block text-gray-900 text-base hover:bg-blue-600 px-4 py-2 hover:text-white">Sort by View</a>
-            <a href=#null @click="Sort_vote()" class="block text-gray-900 text-base hover:bg-blue-600 px-4 py-2 hover:text-white">Sort by Vote</a>
-            <a href=#null @click="Sort_commnet()" class="block text-gray-900 text-base hover:bg-blue-600 px-4 py-2 hover:text-white">Sort by Comment</a>
+            <a  @click="Sort_time()" class="cursor-pointer block text-gray-900 text-base hover:bg-blue-600 px-4 py-2 hover:text-white">Sort by Time</a>
+            <a  @click="Sort_view()" class="cursor-pointer block text-gray-900 text-base hover:bg-blue-600 px-4 py-2 hover:text-white">Sort by View</a>
+            <a  @click="Sort_vote()" class="cursor-pointer block text-gray-900 text-base hover:bg-blue-600 px-4 py-2 hover:text-white">Sort by Vote</a>
+            <a  @click="Sort_commnet()" class="cursor-pointer block text-gray-900 text-base hover:bg-blue-600 px-4 py-2 hover:text-white">Sort by Comment</a>
         </div>
     </div>
 </template>

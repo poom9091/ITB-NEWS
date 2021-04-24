@@ -1,9 +1,9 @@
 <template lang="">
     <div class="relative">
         <button v-on:click="isOpen=!isOpen" class="focus:outline-none  block transition duration-300 ease-in-out p-2  rounded-full 
-                        bg-white text-blue-500 border-4 border-blue-600
-                        hover:bg-blue-600 hover:text-white " >
-            <svg xmlns="http://www.w3.org/2000/svg" class=" h-6 w-6 " viewBox="0 0 20 20" fill="currentColor">
+                        bg-white text-blue-500  sm:border-4 border-blue-600
+                        hover:bg-blue-400 hover:text-white " >
+            <svg xmlns="http://www.w3.org/2000/svg" class=" sm:h-6 sm:w-6 w-4 h-4 " viewBox="0 0 20 20" fill="currentColor">
                 <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
             </svg>
         </button>

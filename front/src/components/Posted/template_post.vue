@@ -14,18 +14,33 @@
       </div>
       <div class="flex justify-between flex-wrap content-center">
         <div class="text-2xl font-bold ">{{ p.posttitle }}</div>
-         <div class="flex flex-row space-x-2 text-gray-400 text-sm">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 m-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-              </svg>
-              <div class=" flex space-x-2 m-auto">
-                <div>{{ p.view }}  </div>
-                <div class=" invisible sm:visible w-0 sm:w-max">View</div>
-              </div>
+        <div class="flex flex-row space-x-2 text-gray-400 text-sm">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-5 w-5 m-auto"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+            />
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+            />
+          </svg>
+          <div class=" flex space-x-2 m-auto">
+            <div>{{ p.view }}</div>
+            <div class=" invisible sm:visible w-0 sm:w-max">View</div>
+          </div>
+        </div>
       </div>
-      </div>
-     
     </div>
     <router-link
       :to="{
@@ -37,18 +52,25 @@
     >
       <div class="px-4 py-2  border-b-2">
         <div class="flex justify-between">
-          <div class=" text-sm font-medium sm:truncate w-full ">{{ p.newtitle }}</div>
-          
+          <div class=" text-sm font-medium sm:truncate w-full ">
+            {{ p.newtitle }}
+          </div>
         </div>
-        <div class=" flex flex-col sm:flex-row space-y-2 sm:space-x-2 mt-2 relative">
+        <div
+          class=" flex flex-col sm:flex-row space-y-2 sm:space-x-2 mt-2 relative"
+        >
           <img :src="p.newimg" class=" rounded-lg sm:w-60  w-full" />
-          <div class=" italic text-xs sm:text-sm text-justify overflow-ellipsis">
+          <div
+            class=" italic text-xs sm:text-sm text-justify overflow-ellipsis"
+          >
             {{ p.newdes }}
           </div>
         </div>
       </div>
 
-      <div class=" p-3 overflow-ellipsis overflow-auto text-sm sm:text-base max-h-24 border-b-2">
+      <div
+        class=" p-3 overflow-ellipsis overflow-auto text-sm sm:text-base max-h-24 border-b-2"
+      >
         {{ p.postdes }}
       </div>
     </router-link>
@@ -94,7 +116,7 @@
             </svg>
           </div>
           <div></div>
-          <div >{{ p.vote.length }}</div>
+          <div>{{ p.vote.length }}</div>
           <div class="invisible sm:visible w-0 sm:w-8 ">Vote</div>
         </button>
 
@@ -138,7 +160,9 @@
               clip-rule="evenodd"
             />
           </svg>
-          <div class="sm:visible sm:max-w-max sm:w-max w-0 invisible ">Topic New</div>
+          <div class="sm:visible sm:max-w-max sm:w-max w-0 invisible ">
+            Mention
+          </div>
         </button>
         <button
           v-on:click="goURL(p.newurl)"
@@ -146,18 +170,21 @@
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            class=" h-6 w-6 "
-            viewBox="0 0 20 20"
-            fill="currentColor"
+            class="h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
           >
             <path
-              d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"
-            />
-            <path
-              d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
             />
           </svg>
-          <div class="sm:visible sm:max-w-max sm:w-max w-0 invisible ">Link to news</div>
+          <div class="sm:visible sm:max-w-max sm:w-max w-0 invisible ">
+            Link to news
+          </div>
         </button>
       </div>
     </div>
@@ -167,7 +194,7 @@
 import axios from "axios";
 export default {
   props: ["p", "user"],
-  
+
   created() {
     console.log(this.p);
   },

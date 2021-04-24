@@ -95,6 +95,7 @@ export default createStore({
     Logout({ commit }) {
       commit("setUserOut");
     },
+
     async getNewsFromApi({ commit }) {
       let n = [];
       await axios.get(urlnew).then((response) => {
