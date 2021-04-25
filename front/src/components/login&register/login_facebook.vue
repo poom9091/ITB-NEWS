@@ -52,6 +52,9 @@ export default {
 
           user.uid = getuser.uid;
           user.name = getuser.displayName;
+          this.setUser(user);
+          localStorage.uid = user.uid
+          localStorage.name = user.name
           console.log("displayName :: ", getuser.displayName);
           console.log("UID :: ", getuser.uid);
           console.log("email ::", getuser.email);
@@ -59,9 +62,7 @@ export default {
         .catch(function(error) {
           console.log(error);
         });
-      this.setUser(user);
-      localStorage.uid = user.uid
-      localStorage.name = user.name
+      
       this.$router.push("/");
     },
   },

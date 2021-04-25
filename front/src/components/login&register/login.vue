@@ -54,15 +54,16 @@ export default {
           var getuser = userCredential.user;
           user.uid = getuser.uid;
           user.name = getuser.displayName;
+          this.setUser(user);
+          localStorage.uid = user.uid
+          localStorage.name = user.name
           console.log(getuser);
           // ...
         })
         .catch((error) => {
           console.log(error);
         });
-      this.setUser(user);
-      localStorage.uid = user.uid
-      localStorage.name = user.name
+     
       this.$router.push("/");
     },
   },
