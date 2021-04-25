@@ -3,6 +3,7 @@ from flask_cors import CORS
 from bson import ObjectId, json_util
 from flask import Flask, jsonify, request
 from datetime import datetime
+from newsapi import NewsApiClient
 
 app = Flask(__name__)
 CORS(app)
@@ -11,6 +12,8 @@ myclient = pymongo.MongoClient("mongodb+srv://itnews:admin@itnews.ke8gb.mongodb.
 mydb = myclient["Adv"]
 post = mydb["post"]
 comm = mydb["comment"]
+
+newsapi = NewsApiClient(api_key="380094e98a684b578fa885b235439b36")
 
 # ----------------------------CREATE------------------------------------
 
@@ -330,9 +333,12 @@ def delete_comm(id):
 #     x = post.update_one(gpost, vote)
 #     return jsonify({"status": "vote Success"})
 
-@app.route('/')
-def hello():
-    return "Hello IT"
+@app.route("/", methods=["GET"])
+def getnews():
+    top_headlines = newsapi.get_top_headlines(
+        category="technology", language="en", country="us"
+    )
+    return top_headlines
 
 if __name__ == "__main__":
     # app.run(host="127.0.0.1", port=81)
