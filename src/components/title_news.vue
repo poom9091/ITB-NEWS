@@ -222,7 +222,7 @@ export default {
   },
   methods: {
     goURL(url) {
-      window.location.href = url;
+      window.open(url);
     },
     CreatePost(n) {
       this.$router.push({

@@ -69,9 +69,9 @@ export default {
       };
       console.log(commentdata);
 
-      axios.post("https://it-itnews.herokuapp.com/createcomment", commentdata);
+      axios.post("https://it-itnews.herokuapp.com/createcomment",commentdata);
       this.$router.go(this.$router.currentRoute);
-      this.$forceUpdate();
+      // this.$forceUpdate();
 
       // .then((response) => (console.log(response.data)));
     },

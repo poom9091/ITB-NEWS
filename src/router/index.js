@@ -1,7 +1,15 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/Home.vue'
-
-
+import login from '../views/Login.vue'
+import template_login from '../components/login&register/template_login'
+import register from '../components/login&register/register.vue'
+import Board from '../views/Board.vue'
+import all_post_profile from  '../components/Posted/all_post_profile'
+import all_post_topic from '../components/Posted/all_post_topic'
+import all_post from '../components/Posted/all_post'
+import News from '../views/News.vue'
+import Createpost from '../views/Createpost.vue'
+import Comment from '../views/Comment.vue'
 const routes = [
   {
     path: '/',
@@ -11,55 +19,55 @@ const routes = [
   {
     path: '/login',
     name: 'Login',
-    component: () => import(/* webpackChunkName: "about" */ '../views/Login.vue'),
+    component: login,
     children:[
       {
         path:'',
-        component: () => import('../components/login&register/template_login')
+        component: template_login
       },
       {
         path:'register',
-        component: () => import('../components/login&register/register.vue')
+        component: register
       },
     ]
   },
   {
     path: '/board',
     name: 'Board',
-    component: () => import(/* webpackChunkName: "about" */ '../views/Board.vue'),
+    component: Board,
     children:[
       {
         name:'Board_profile',
         path:'profile/:uid/:name',
-        component: () => import(/* webpackChunkName: "about" */ '../components/Posted/all_post_profile'),
+        component: all_post_profile,
         props:true
       },
       {
         path:'topic_news/:topic',
-        component: () => import(/* webpackChunkName: "about" */ '../components/Posted/all_post_topic'),
+        component: all_post_topic,
         props:true
       },
       {
         path:'',
-        component: () => import('../components/Posted/all_post')
+        component: all_post
       },
     ]
   },
   {
     path: '/news',
     name: 'News',
-    component: () => import(/* webpackChunkName: "about" */ '../views/News.vue')
+    component: News
   },
   {
     path: '/createboard/:title',
     name: 'Create',
-    component: () => import(/* webpackChunkName: "about" */ '../views/Createpost.vue'),
+    component: Createpost,
     props:true
   },
   {
     path: '/comment/:_id',
     name: 'Comment',
-    component: () => import('../views/Comment.vue'),
+    component: Comment,
     prop:true
   }
 ]
