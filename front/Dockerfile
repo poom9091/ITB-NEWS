@@ -10,6 +10,6 @@ RUN npm install
 
 COPY . /app
 
-EXPOSE 8080
+EXPOSE 8080:8080
 
 CMD ["npm","run","serve"]
