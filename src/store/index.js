@@ -2,7 +2,7 @@ import axios from "axios";
 import { createStore } from "vuex";
 
 let urlnew =
-  "https://newsapi.org/v2/top-headlines?country=us&category=technology&apiKey=380094e98a684b578fa885b235439b36";
+  "https://it-itnews.herokuapp.com/";
 
 // Get all post
 
