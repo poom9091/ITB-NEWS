@@ -292,7 +292,7 @@ export default {
         console.log(detail);
 
         axios
-          .put("https://it-itnews.herokuapp.com/editpost", linkcomment)
+          .put("https://it-itnews.herokuapp.com/editpost/"+ this.post_id, linkcomment)
           .finally(() => {
             this.getNew();
           });
@@ -309,7 +309,7 @@ export default {
       }
       // p.vote.pop(this.user.uid);
       console.log(detail);
-      axios.put("https://it-itnews.herokuapp.com/editpost", linkcomment).finally(() => {
+      axios.put("https://it-itnews.herokuapp.com/editpost/"+ this.post_id, linkcomment).finally(() => {
         this.getNew();
       });
     },
