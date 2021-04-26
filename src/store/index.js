@@ -62,7 +62,7 @@ export default createStore({
     },
     set_sort_post_vote(state) {
       state.posts.sort(function(a, b) {
-        return b.view.length - a.view.length;
+        return b.vote.length - a.vote.length;
       });
     },
     set_sort_post_comment(state) {
