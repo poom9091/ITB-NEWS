@@ -284,32 +284,24 @@ export default {
           this.$router.push("/login");
         }
       } else {
-        let linkcomment = {
-          _id: detail._id,
-          uid: this.user.uid,
-        };
         detail.vote.push(this.user.uid);
         console.log(detail);
 
         axios
-          .put("https://it-itnews.herokuapp.com/editpost/"+ this.post_id, linkcomment)
+          .put("https://it-itnews.herokuapp.com/editpost/"+ this.post_id, detail)
           .finally(() => {
             this.getNew();
           });
       }
     },
     dislinkcomment(detail) {
-      let linkcomment = {
-        _id: detail._id,
-        uid: this.user.uid,
-      };
       var index = detail.vote.indexOf(this.user.uid);
       if (index > -1) {
         detail.vote.splice(index, 1);
       }
       // p.vote.pop(this.user.uid);
       console.log(detail);
-      axios.put("https://it-itnews.herokuapp.com/editpost/"+ this.post_id, linkcomment).finally(() => {
+      axios.put("https://it-itnews.herokuapp.com/editpost/"+ this.post_id, detail).finally(() => {
         this.getNew();
       });
     },
