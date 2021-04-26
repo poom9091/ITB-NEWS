@@ -52,7 +52,7 @@ export default {
   methods: {
     ...mapGetters(["getUID"]),
 
-    setComment() {
+    async setComment() {
       let THtime = new Date().toLocaleString("th-TH", {
         year: "numeric",
         month: "numeric",
@@ -69,8 +69,8 @@ export default {
       };
       console.log(commentdata);
 
-      axios.post("https://it-itnews.herokuapp.com/createcomment",commentdata);
-      this.$router.go(this.$router.currentRoute);
+      await axios.post("https://it-itnews.herokuapp.com/createcomment",commentdata);
+      await this.$router.go(this.$router.currentRoute);
       // this.$forceUpdate();
 
       // .then((response) => (console.log(response.data)));
