@@ -8,3 +8,5 @@ run Project
 run Project
 - pip install -r requirements.txt
 - python app.py
+# Docker-compose
+- docker-compose up
