@@ -122,7 +122,7 @@ export default {
         postdes: this.pdes,
       };
       await axios
-        .post("https://it-itnews.herokuapp.com/createpost", newinfo)
+        .post("http://127.0.0.1:5000/createpost", newinfo)
 
         .then((response) => (this.newinfo = response.data));
       console.log(newinfo);

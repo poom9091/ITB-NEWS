@@ -257,7 +257,7 @@ export default {
     async deletePost(comment) {
       console.log(comment);
       await axios
-        .delete("https://it-itnews.herokuapp.com/delpost/" + this.post_id)
+        .delete("http://127.0.0.1:5000/delpost/" + this.post_id)
         .finally(() => {
           this.$router.push("/board");
         });
@@ -270,7 +270,7 @@ export default {
       this.$forceUpdate();
       await axios
 
-        .put("https://it-itnews.herokuapp.com/editpost/" + this.post_id, this.detail[0])
+        .put("http://127.0.0.1:5000/editpost/" + this.post_id, this.detail[0])
 
         .finally(() => {
           this.getNew();
@@ -288,7 +288,7 @@ export default {
         console.log(detail);
 
         axios
-          .put("https://it-itnews.herokuapp.com/editpost/"+ this.post_id, detail)
+          .put("http://127.0.0.1:5000/editpost/"+ this.post_id, detail)
           .finally(() => {
             this.getNew();
           });
@@ -301,7 +301,7 @@ export default {
       }
       // p.vote.pop(this.user.uid);
       console.log(detail);
-      axios.put("https://it-itnews.herokuapp.com/editpost/"+ this.post_id, detail).finally(() => {
+      axios.put("http://127.0.0.1:5000/editpost/"+ this.post_id, detail).finally(() => {
         this.getNew();
       });
     },
@@ -319,7 +319,7 @@ export default {
         //   },
         // })
 
-        .get("https://it-itnews.herokuapp.com/gpost/" + this.post_id)
+        .get("http://127.0.0.1:5000/gpost/" + this.post_id)
 
 
         .then((response) => {

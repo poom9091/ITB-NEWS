@@ -2,11 +2,11 @@ import axios from "axios";
 import { createStore } from "vuex";
 
 let urlnew =
-  "https://it-itnews.herokuapp.com/";
+  "http://127.0.0.1:5000/";
 
 // Get all post
 
-let apipost = "https://it-itnews.herokuapp.com/allpost";
+let apipost = "http://127.0.0.1:5000/allpost";
 
 export default createStore({
   state: {

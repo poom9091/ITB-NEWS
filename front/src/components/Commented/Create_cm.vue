@@ -69,7 +69,7 @@ export default {
       };
       console.log(commentdata);
 
-      await axios.post("https://it-itnews.herokuapp.com/createcomment",commentdata);
+      await axios.post("http://127.0.0.1:5000/createcomment",commentdata);
       await this.$router.go(this.$router.currentRoute);
       // this.$forceUpdate();
 

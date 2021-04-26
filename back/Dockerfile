@@ -6,10 +6,10 @@ WORKDIR /src
 
 COPY requirements.txt /src
 
-RUN pip install -r requirements.txt
+RUN pip3 install -r requirements.txt
 
 COPY . /src
 
 EXPOSE 5000
 
-CMD python app.py
+CMD python3 app.py
