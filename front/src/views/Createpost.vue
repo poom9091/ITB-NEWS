@@ -71,6 +71,7 @@ export default {
         name: null,
       },
       ptitle: "",
+      pdes:null,
     };
   },
   title: "",
@@ -79,7 +80,7 @@ export default {
   url: "",
   time: "",
 
-  pdes: "",
+  
   created() {
     this.title = this.$route.params.title;
     this.img = this.$route.params.img;
