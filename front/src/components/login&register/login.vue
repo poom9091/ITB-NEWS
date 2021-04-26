@@ -51,19 +51,22 @@ export default {
         .signInWithEmailAndPassword(this.email, this.password)
         .then((userCredential) => {
           // Signed in
+
           var getuser = userCredential.user;
           user.uid = getuser.uid;
           user.name = getuser.displayName;
           console.log(getuser);
           // ...
+        }).then(()=>{
+          this.setUser(user);
+          localStorage.uid = user.uid
+          localStorage.name = user.name
+          this.$router.push("/");
         })
         .catch((error) => {
           console.log(error);
         });
-      this.setUser(user);
-      localStorage.uid = user.uid
-      localStorage.name = user.name
-      this.$router.push("/");
+      
     },
   },
 };

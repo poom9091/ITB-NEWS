@@ -3,6 +3,7 @@ from flask_cors import CORS
 from bson import ObjectId, json_util
 from flask import Flask, jsonify, request
 from datetime import datetime
+from newsapi import NewsApiClient
 
 app = Flask(__name__)
 CORS(app)
@@ -12,13 +13,15 @@ mydb = myclient["Adv"]
 post = mydb["post"]
 comm = mydb["comment"]
 
+newsapi = NewsApiClient(api_key="380094e98a684b578fa885b235439b36")
+
 # ----------------------------CREATE------------------------------------
 
 
 @app.route("/createpost", methods=["POST"])
 def create_post():
     now = datetime.now()
-    dt = now.strftime("%d/%m/%Y %H:%M")
+    dt = now.strftime("%d/%m/%Y %H:%M:%S")
     newpost = {
         "newtitle": request.json["newtitle"],
         "newimg": request.json["newimg"],
@@ -40,7 +43,7 @@ def create_post():
 @app.route("/createcomment", methods=["POST"])
 def create_comm():
     now = datetime.now()
-    dt = now.strftime("%d/%m/%Y %H:%M")
+    dt = now.strftime("%d/%m/%Y %H:%M:%S")
     newcomm = {
         "user_id": request.json["user_id"],
         "username": request.json["username"],
@@ -330,6 +333,12 @@ def delete_comm(id):
 #     x = post.update_one(gpost, vote)
 #     return jsonify({"status": "vote Success"})
 
+@app.route("/", methods=["GET"])
+def getnews():
+    top_headlines = newsapi.get_top_headlines(
+        category="technology", language="en", country="us"
+    )
+    return top_headlines
 
 if __name__ == "__main__":
     # app.run(host="127.0.0.1", port=81)

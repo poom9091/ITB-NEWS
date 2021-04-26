@@ -123,7 +123,7 @@ export default {
   },
   methods: {
     goURL(url) {
-      window.location.href = url;
+      window.open(url);
     },
     go_topic(newTopic) {
       this.$router.push({ path: `/board/topic_news/${newTopic}` });

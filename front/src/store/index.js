@@ -2,7 +2,7 @@ import axios from "axios";
 import { createStore } from "vuex";
 
 let urlnew =
-  "https://newsapi.org/v2/top-headlines?country=us&category=technology&apiKey=380094e98a684b578fa885b235439b36";
+  "https://it-itnews.herokuapp.com/";
 
 // Get all post
 
@@ -62,7 +62,7 @@ export default createStore({
     },
     set_sort_post_vote(state) {
       state.posts.sort(function(a, b) {
-        return b.view.length - a.view.length;
+        return b.vote.length - a.vote.length;
       });
     },
     set_sort_post_comment(state) {

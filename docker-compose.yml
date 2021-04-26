@@ -9,7 +9,7 @@ services:
     back:
         build: ./back
         ports:
-            - "8081:8081"
+            - "5000:5000"
         networks: 
             - default
 networks: 

@@ -55,14 +55,16 @@ export default {
           console.log("displayName :: ", getuser.displayName);
           console.log("UID :: ", getuser.uid);
           console.log("email ::", getuser.email);
+        }).then(()=>{
+          this.setUser(user);
+          localStorage.uid = user.uid
+          localStorage.name = user.name
+          this.$router.push("/");
         })
         .catch(function(error) {
           console.log(error);
         });
-      this.setUser(user);
-      localStorage.uid = user.uid
-      localStorage.name = user.name
-      this.$router.push("/");
+         
     },
   },
 };

@@ -206,7 +206,7 @@ export default {
       this.$router.push({ path: `/board/profile/${uid}/${name}` });
     },
     goURL(url) {
-      window.location.href = url;
+      window.open(url);
     },
 
     linkcomment(p) {
