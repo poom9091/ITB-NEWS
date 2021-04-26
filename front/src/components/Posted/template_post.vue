@@ -223,9 +223,11 @@ export default {
         p.vote.push(this.user.uid);
         console.log(p);
         // api comment
-        axios.put("http://127.0.0.1:5000/editpost/" + p._id, p).finally(() => {
-          this.getPostFromApi();
-        });
+        axios
+          .put("https://it-itnews.herokuapp.com/editpost/" + p._id, p)
+          .finally(() => {
+            this.getPostFromApi();
+          });
       }
     },
     dislinkcomment(p) {
@@ -240,9 +242,11 @@ export default {
       // p.vote.pop(this.user.uid);
       console.log(p);
       // api comment
-      axios.put("http://127.0.0.1:5000/editpost/" + p._id, p).finally(() => {
-        this.getPostFromApi();
-      });
+      axios
+        .put("https://it-itnews.herokuapp.com/editpost/" + p._id, p)
+        .finally(() => {
+          this.getPostFromApi();
+        });
     },
     go_topic(newTopic) {
       this.$router.push({ path: `/board/topic_news/${newTopic}` });

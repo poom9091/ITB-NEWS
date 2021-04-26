@@ -121,7 +121,7 @@ export default {
         postdes: this.pdes,
       };
       await axios
-        .post("http://127.0.0.1:5000/createpost", newinfo)
+        .post(" http://127.0.0.1:5000/createpost", newinfo)
 
         .then((response) => (this.newinfo = response.data));
       console.log(newinfo);

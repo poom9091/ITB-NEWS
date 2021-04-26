@@ -6,7 +6,7 @@ let urlnew =
 
 // Get all post
 
-let apipost = "http://127.0.0.1:5000/allpost";
+let apipost = "https://it-itnews.herokuapp.com//allpost";
 
 export default createStore({
   state: {

@@ -254,7 +254,7 @@ export default {
     async deletePost(comment) {
       console.log(comment);
       await axios
-        .delete("http://127.0.0.1:5000/delpost/" + this.post_id)
+        .delete("https://it-itnews.herokuapp.com/delpost/" + this.post_id)
         .finally(() => {
           this.$router.push("/board");
         });
@@ -266,7 +266,10 @@ export default {
       this.edit = false;
       this.$forceUpdate();
       await axios
-        .put("http://127.0.0.1:5000/editpost/" + this.post_id, this.detail[0])
+        .put(
+          "https://it-itnews.herokuapp.com/editpost/" + this.post_id,
+          this.detail[0]
+        )
         .finally(() => {
           this.getNew();
           console.log(this.detail[0]);
@@ -287,7 +290,7 @@ export default {
         console.log(detail);
 
         axios
-          .put("http://127.0.0.1:5000/createpost", linkcomment)
+          .put("https://it-itnews.herokuapp.com/createpost", linkcomment)
           .finally(() => {
             this.getNew();
           });
@@ -304,16 +307,18 @@ export default {
       }
       // p.vote.pop(this.user.uid);
       console.log(detail);
-      axios.put("http://127.0.0.1:5000/createpost", linkcomment).finally(() => {
-        this.getNew();
-      });
+      axios
+        .put("https://it-itnews.herokuapp.com/createpost", linkcomment)
+        .finally(() => {
+          this.getNew();
+        });
     },
 
     async getNew() {
       let post_id1 = { _id: this.post_id };
       await console.log(post_id1);
       await axios
-        .get("http://127.0.0.1:5000/gpost/" + this.post_id)
+        .get("https://it-itnews.herokuapp.com/gpost/" + this.post_id)
 
         .then((response) => {
           this.detail = response.data;

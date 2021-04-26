@@ -3,14 +3,25 @@ from flask_cors import CORS
 from bson import ObjectId, json_util
 from flask import Flask, jsonify, request
 from datetime import datetime
+from newsapi import NewsApiClient
 
 app = Flask(__name__)
 CORS(app)
+newsapi = NewsApiClient(api_key="380094e98a684b578fa885b235439b36")
 # myclient = pymongo.MongoClient("mongodb://localhost:27017")
 myclient = pymongo.MongoClient("mongodb+srv://itnews:admin@itnews.ke8gb.mongodb.net")
 mydb = myclient["Adv"]
 post = mydb["post"]
 comm = mydb["comment"]
+
+
+@app.route("/", methods=["GET"])
+def getnews():
+    top_headlines = newsapi.get_top_headlines(
+        category="technology", language="en", country="us"
+    )
+    return top_headlines
+
 
 # ----------------------------CREATE------------------------------------
 
@@ -18,7 +29,7 @@ comm = mydb["comment"]
 @app.route("/createpost", methods=["POST"])
 def create_post():
     now = datetime.now()
-    dt = now.strftime("%d/%m/%Y %H:%M")
+    dt = now.strftime("%d/%m/%Y %H:%M:%S")
     newpost = {
         "newtitle": request.json["newtitle"],
         "newimg": request.json["newimg"],
@@ -40,7 +51,7 @@ def create_post():
 @app.route("/createcomment", methods=["POST"])
 def create_comm():
     now = datetime.now()
-    dt = now.strftime("%d/%m/%Y %H:%M")
+    dt = now.strftime("%d/%m/%Y %H:%M:%S")
     newcomm = {
         "user_id": request.json["user_id"],
         "username": request.json["username"],
@@ -315,6 +326,13 @@ def delete_comm(id):
     gcomm = {"_id": ObjectId(id)}
     x = comm.delete_one(gcomm)
     return jsonify({"status": "Delete success"})
+
+
+# @app.route("/delall", methods=["DELETE"])
+# def deleteall():
+#     x = comm.delete_many({})
+#     y = post.delete_many({})
+#     return jsonify({"status": "Delete success"})
 
 
 # # ------------------------------VOTE-------------------------------------

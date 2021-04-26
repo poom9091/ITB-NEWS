@@ -100,7 +100,7 @@ export default {
     },
     async delComment(id) {
       await axios
-        .delete("http://127.0.0.1:5000/delcomment/" + id._id, id)
+        .delete("https://it-itnews.herokuapp.com/delcomment/" + id._id, id)
         .finally(() => {
           this.getAllComment();
           // console.log(this.comments);
@@ -112,7 +112,7 @@ export default {
       this.comment_id_edit = null;
 
       axios
-        .put("http://127.0.0.1:5000/editcomment/" + id._id, id)
+        .put("https://it-itnews.herokuapp.com/editcomment/" + id._id, id)
         .finally(() => {
           this.getAllComment();
           console.log(this.comments);
@@ -121,7 +121,7 @@ export default {
 
     async getAllComment() {
       await axios
-        .get("http://127.0.0.1:5000/comment/" + this.post_id)
+        .get("https://it-itnews.herokuapp.com/comment/" + this.post_id)
 
         .then((response) => {
           this.comments = response.data;
