@@ -21,7 +21,7 @@ newsapi = NewsApiClient(api_key="380094e98a684b578fa885b235439b36")
 @app.route("/createpost", methods=["POST"])
 def create_post():
     now = datetime.now()
-    dt = now.strftime("%d/%m/%Y %H:%M")
+    dt = now.strftime("%d/%m/%Y %H:%M:%S")
     newpost = {
         "newtitle": request.json["newtitle"],
         "newimg": request.json["newimg"],
@@ -43,7 +43,7 @@ def create_post():
 @app.route("/createcomment", methods=["POST"])
 def create_comm():
     now = datetime.now()
-    dt = now.strftime("%d/%m/%Y %H:%M")
+    dt = now.strftime("%d/%m/%Y %H:%M:%S")
     newcomm = {
         "user_id": request.json["user_id"],
         "username": request.json["username"],
